@@ -49,6 +49,6 @@ export const User = sequelize.define('user',
 // the following sync should be removed from production to 
 // ensure the database is not accidentally modified by production
 User.sync({alter:true})
-    .then(console.log('User table synched'))
+    .then()
     .catch(error => console.log('User table creation error'))
 

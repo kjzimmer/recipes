@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
-import {allServices} from '../services/services';
+import {userServices} from '../services/services';
 import { useState } from 'react';
 
 export function UserLogin() {
@@ -10,7 +10,7 @@ export function UserLogin() {
     function handleSubmit(e){
         e.preventDefault()
 
-        allServices.login({email:e.target.email.value, password:e.target.password.value})
+        userServices.login({email:e.target.email.value, password:e.target.password.value})
         // NOTE: redirect after sucessful login is currently done in allServices.  should this be done here instead?
         // .then(data => {
         //     navigate('/recipes')
@@ -33,7 +33,7 @@ export function UserLogin() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type='password' name='password' placeholder='Password' />
                 </Form.Group>
-                <p>{errors}</p>
+                <p className='text-danger'>{errors}</p>
                 <Button type='submit' className='form'>
                     Submit
                 </Button>

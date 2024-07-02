@@ -1,13 +1,13 @@
 import Carousel from 'react-bootstrap/Carousel';
 import { ExampleRecipe } from './ExampleRecipe';
 import Button from 'react-bootstrap/esm/Button';
-import {allServices} from '../services/services';
+import {userServices} from '../services/services';
 
 
 
 export function Recipes() {
     function getUsers(){
-        allServices.getAll()
+        userServices.getAll()
             .then(data => console.log('all users: ',data))
     }
 

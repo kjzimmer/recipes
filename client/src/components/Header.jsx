@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-import {allServices} from '../services/services';
+import {userServices} from '../services/services';
 
 
 export function Header() {
@@ -21,7 +21,7 @@ export function Header() {
               <NavDropdown.Item href="/underConstruction">Security</NavDropdown.Item>
               <NavDropdown.Item href="/underConstruction">Other</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item  onClick={allServices.logout}>Sign Out</NavDropdown.Item>
+              <NavDropdown.Item  onClick={userServices.logout}>Sign Out</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

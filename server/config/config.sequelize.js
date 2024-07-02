@@ -23,7 +23,6 @@ export const sequelize = new Sequelize(
 
 export const dbConnect = () => {
     const conn = sequelize.authenticate()
-    console.log('conn: ', conn)
     conn
     .then( console.log(`Connected to ${DB_NAME}`) )
     .catch( error => console.log(`Failed to connect to ${DB_NAME}`) )
