@@ -1,0 +1,43 @@
+#root {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.form {
+  margin-top: 2%;
+}
+
+.recipeFormCheckbox {
+  margin-top: 5%;
+  padding: 0% 33% 0% 33%;
+}
+
+.exampleRecipe {
+  height: 300px;
+  width: 735px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.loginAndRegPage {
+  justify-content: space-around;
+}
+
+.loginAndRegLink {
+  display: inline-flex;
+  border: 1px solid black;
+  margin: 4%;
+  padding: 1%;
+  justify-content: space-around;
+  border-radius: 7px;
+}
+
+.recipeCarousel h2 {
+  color: white;
+}
+
+.recipeCarousel p {
+  color: white;
+}
