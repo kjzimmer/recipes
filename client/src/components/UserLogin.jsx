@@ -1,4 +1,4 @@
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import {userServices} from '../services/services';
@@ -23,7 +23,7 @@ export function UserLogin() {
 
     return(
         <>
-            <h1>Login</h1>
+            <h2>Login</h2>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className='form'>
                     <Form.Label>Email</Form.Label>
@@ -38,6 +38,7 @@ export function UserLogin() {
                     Submit
                 </Button>
             </Form>
+            <Link to={'/register'}>Get an Account</Link>
         </>
     )
 }

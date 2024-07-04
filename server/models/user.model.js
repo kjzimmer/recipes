@@ -2,6 +2,9 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../config/config.sequelize.js";
 import bcrypt from 'bcrypt'
 
+import { Recipe } from "./recipe.model.js";
+import { Rating } from "./rating.model.js";
+
 export const User = sequelize.define('user',
     {
         firstName: {
@@ -36,19 +39,33 @@ export const User = sequelize.define('user',
         }
     },
     {
-        hooks:{
+        hooks: {
             afterValidate: (user) => {
                 if (user.password) {
-                 user.password = bcrypt.hashSync(user.password, 10);
+                    user.password = bcrypt.hashSync(user.password, 10);
                 }
             }
         }
     }
 )
 
+Recipe.belongsTo(User)
+User.hasMany(Recipe)
+
+Rating.belongsTo(User)
+User.hasMany(Rating, { onDelete: 'SET NULL', onUpdate: 'CASCADE' })
+
 // the following sync should be removed from production to 
 // ensure the database is not accidentally modified by production
-User.sync({alter:true})
-    .then()
-    .catch(error => console.log('User table creation error'))
+User.sync({ alter: true, force: true })
+    .then(() => {
+        Recipe.sync({ alter: true, force: true })
+            .then()
+            .catch(error => console.log('Recipes table sync error: ', error))
+
+        Rating.sync({ alter: true, force: true })
+            .then()
+            .catch(error => console.log('Ratings table sync error: ', error))
+    })
+    .catch(error => console.log('User table creation error: ', error))
 

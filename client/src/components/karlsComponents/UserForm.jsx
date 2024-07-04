@@ -4,10 +4,10 @@ import Button from 'react-bootstrap/esm/Button';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import { userServices } from '../../services/services';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
-export function UserForm() {
+export function UserForm({ submitHandler }) {
     const [user, setUser] = useState({
         firstName: '',
         lastName: '',
@@ -15,7 +15,15 @@ export function UserForm() {
         password: '',
         confirmPassword: '',
     })
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState({
+        firstName: 'Must be at least 3 characters',
+        lastName: 'Must be at least 3 characters',
+        email: 'Must be a valid email',
+        password: 'Pasword must contain at lease 8 characters, upper and lower case, a number and a special character',
+        confirmPassword: 'Passwords must match',
+        form: false
+    })
+    const [displayErrors, setDisplayErrors] = useState(false)
     const navigate = useNavigate()
 
     const updateInput = e => {
@@ -63,19 +71,23 @@ export function UserForm() {
     const handleSubmit = e => {
         e.preventDefault()
 
-        console.log(user)
-
-        userServices.register(user)
+        setDisplayErrors(true)
+        
+        console.log('form state: ', errors.form)
+        if(errors.form){
+            console.log('submitting')
+            submitHandler(user)
             .then(res => navigate('/admin'))
             .catch(res => {
                 console.log(res.response.data)
                 setErrors(res.response.data.errors)
             })
+        }
     }
 
     return (
         <>
-            <h1>Create an Account</h1>
+            <h2>Create an Account</h2>
             <Form onSubmit={handleSubmit}>
                 <Row className='form'>
                     <Form.Group as={Col}>
@@ -87,7 +99,7 @@ export function UserForm() {
                             value={user.firstName}
                             onChange={updateInput}
                         />
-                        <p className='text-danger'>{errors.firstName}</p>
+                        <p className='text-danger'>{displayErrors && errors.firstName}</p>
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Last Name</Form.Label>
@@ -98,19 +110,19 @@ export function UserForm() {
                             value={user.lastName}
                             onChange={updateInput}
                         />
-                        <p className='text-danger'>{errors.lastName}</p>
+                        <p className='text-danger'>{displayErrors && errors.lastName}</p>
                     </Form.Group>
                 </Row>
                 <Form.Group className='form'>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
-                        type='email'
+                        type='text' // TODO: change this to email for production
                         placeholder='Email'
                         name='email'
                         value={user.email}
                         onChange={updateInput}
                     />
-                    <p className='text-danger'>{errors.email}</p>
+                    <p className='text-danger'>{displayErrors && errors.email}</p>
                 </Form.Group>
                 <Row className='form'>
                     <Form.Group as={Col}>
@@ -122,7 +134,7 @@ export function UserForm() {
                             value={user.password}
                             onChange={updateInput}
                         />
-                    <p className='text-danger'>{errors.password}</p>
+                    <p className='text-danger'>{displayErrors && errors.password}</p>
                     </Form.Group>
                     <Form.Group as={Col}>
                         <Form.Label>Confirm Password</Form.Label>
@@ -133,13 +145,14 @@ export function UserForm() {
                             value={user.confirmPassword}
                             onChange={updateInput}
                         />
-                    <p className='text-danger'>{errors.confirmPassword}</p>
+                    <p className='text-danger'>{displayErrors && errors.confirmPassword}</p>
                     </Form.Group>
                 </Row>
                 <Button type='submit' className='form'>
                     Submit
                 </Button>
             </Form>
+            <Link to={'/'}>Login</Link>
         </>
     )
 }

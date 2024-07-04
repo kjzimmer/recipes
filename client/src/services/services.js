@@ -47,7 +47,7 @@ export const userServices = {
         try {
             const res = await API_INSTANCE.post('/register', user)
             localStorage.setItem('userToken', res.data.token)
-            window.location = '/admin'
+            window.location = '/recipes'
         } catch (error) { throw error }
     },
 
