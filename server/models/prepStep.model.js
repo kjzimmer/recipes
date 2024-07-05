@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
 import { sequelize } from "../config/config.sequelize.js";
+import { DataTypes } from "sequelize";
 
 export const PrepStep = sequelize.define('prepSteps',
     {
@@ -15,7 +15,7 @@ export const PrepStep = sequelize.define('prepSteps',
 
 // the following sync should be removed from production to 
 // ensure the database is not accidentally modified by production
-// PrepStep.sync({alter:true, force:true})
+// PrepStep.sync({alter:true})
 //     .then()
 //     .catch(error => console.log('PrepSteps table sync error'))
 

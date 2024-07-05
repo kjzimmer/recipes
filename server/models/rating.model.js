@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
 import { sequelize } from "../config/config.sequelize.js";
+import { DataTypes } from "sequelize";
 
 export const Rating = sequelize.define('rating',
     {
@@ -26,7 +26,7 @@ export const Rating = sequelize.define('rating',
 
 // the following sync should be removed from production to 
 // ensure the database is not accidentally modified by production
-// Rating.sync({alter:true, force:true})
+// Rating.sync({alter:true})
 //     .then()
 //     .catch(error => console.log('Rating table sync error'))
 

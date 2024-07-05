@@ -1,9 +1,8 @@
-import { DataTypes } from "sequelize";
 import { sequelize } from "../config/config.sequelize.js";
+import { DataTypes } from "sequelize";
 
 import { Ingredient } from "./ingredient.model.js";
 import { PrepStep } from "./prepStep.model.js";
-import { User } from "./user.model.js";
 import { Rating } from "./rating.model.js";
 
 export const Recipe = sequelize.define('recipe',
@@ -25,7 +24,6 @@ export const Recipe = sequelize.define('recipe',
         servings: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            unique: true,
             validate: {
                 min: 1
             }
@@ -33,7 +31,6 @@ export const Recipe = sequelize.define('recipe',
         prepTime: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            unique: true,
             validate: {
                 min: 1
             }
@@ -41,7 +38,6 @@ export const Recipe = sequelize.define('recipe',
         cookTime: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            unique: true,
             validate: {
                 min: 1
             }
@@ -69,19 +65,19 @@ Recipe.hasMany(Rating)
 
 // the following sync should be removed from production to 
 // ensure the database is not accidentally modified by production
-Recipe.sync({ alter: true, force: true })
-    .then(() => {
-        Ingredient.sync({ alter: true, force: true })
-            .then()
-            .catch(error => console.log('Ingredients table sync error'))
+// Recipe.sync({ alter: true, force: true })
+//     .then(() => {
+//         Ingredient.sync({ alter: true })
+//             .then()
+//             .catch(error => console.log('Ingredients table sync error'))
 
-        PrepStep.sync({ alter: true, force: true })
-            .then()
-            .catch(error => console.log('PrepSteps table sync error'))
+//         PrepStep.sync({ alter: true })
+//             .then()
+//             .catch(error => console.log('PrepSteps table sync error'))
 
-        Rating.sync({ alter: true, force: true })
-            .then()
-            .catch(error => console.log('Rating table sync error'))
-    })
-    .catch(error => console.log('Recipes table sync error'))
+//         Rating.sync({ alter: true })
+//             .then()
+//             .catch(error => console.log('Rating table sync error'))
+//     })
+//     .catch(error => console.log('Recipes table sync error'))
 
