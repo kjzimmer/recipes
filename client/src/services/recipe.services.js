@@ -21,7 +21,25 @@ export const recipeServices = {
         try {
             const res = await API_INSTANCE.post('/', recipe)
             return res
-        } catch (error) { throw error }
+        } catch(error){ 
+            error.response.data?.msg ==='session expired' && (window.location = '/')
+            throw error
+        }
     },
+
+    get: async (id) => {
+        try{
+            if(id){
+                const res = await API_INSTANCE.get(`/${id}`)
+                return res.data
+            }else{
+                const res = await API_INSTANCE.get(`/`)
+                return res.data
+            }
+        } catch(error){ 
+            error.response.data?.msg ==='session expired' && (window.location = '/')
+            throw error
+        }
+    }
 }
 
