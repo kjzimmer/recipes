@@ -32,7 +32,17 @@ export const userServices = {
         } catch (error) { throw error }
     },
 
-    getAll: async () => {
+    // Create
+    register: async (user) => {
+        try {
+            const res = await API_INSTANCE.post('/register', user)
+            localStorage.setItem('userToken', res.data.token)
+            window.location = '/recipes'
+        } catch (error) { throw error }
+    },
+
+    // Read
+    getAll: async () => {   // TODO: need to delete this service and use get instead
         try {
             const res = await API_INSTANCE.get('/users')
             return res.data
@@ -42,15 +52,39 @@ export const userServices = {
         }
     },
 
-    //Create
-    register: async (user) => {
-        try {
-            const res = await API_INSTANCE.post('/register', user)
-            localStorage.setItem('userToken', res.data.token)
-            window.location = '/recipes'
-        } catch (error) { throw error }
+    get: async (id) => {
+        try{
+            if(id){
+                const res = await API_INSTANCE.get(`/users/${id}`)
+                return res.data
+            }else{
+                const res = await API_INSTANCE.get(`/`)
+                return res.data
+            }
+        } catch(error){ 
+            error.response.data?.msg ==='session expired' && (window.location = '/')
+            throw error
+        }
     },
 
+    // Update
+    update: async (user) => {
+        try{
+            const res = await API_INSTANCE.put('/', user)
+        } catch(error){ 
+            error.response.data?.msg ==='session expired' && (window.location = '/')
+            throw error
+        }
+    },
 
+    // Delete
+    delete: async (id) => { // TODO: this needs to be set inactive not delete
+        try{
+            const res = await API_INSTANCE.delete(`/${id}`)
+        } catch(error){ 
+            error.response.data?.msg ==='session expired' && (window.location = '/')
+            throw error
+        }
+    }
 }
 

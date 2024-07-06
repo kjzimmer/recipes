@@ -49,23 +49,10 @@ export const User = sequelize.define('user',
     }
 )
 
+
 Recipe.belongsTo(User, {foreignKey: 'userId'})
 User.hasMany(Recipe, {foreignKey: 'userId'})
 
 Rating.belongsTo(User, {foreignKey: 'userId'})
 User.hasMany(Rating, {foreignKey: 'userId'})
-
-// the following sync should be removed from production to 
-// ensure the database is not accidentally modified by production
-// User.sync({ alter: true })
-//     .then(() => {
-//         Recipe.sync({ alter: true })
-//             .then()
-//             .catch(error => console.log('Recipes table sync error: ', error))
-
-//         Rating.sync({ alter: true })
-//             .then()
-//             .catch(error => console.log('Ratings table sync error: ', error))
-//     })
-//     .catch(error => console.log('User table creation error: ', error))
 

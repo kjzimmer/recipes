@@ -123,8 +123,8 @@ export const userController = {
  
     // delete
     delete: async (req, res) => {
-        // TODO: arrange a means to deal with cases where the user is refferenced by othe tables
-        // need to either delete the refference or keep the usere but mark them in active
+        // TODO: arrange a means to set the user as inactive instead of delete
+        // delete of a user should be prevented so history (recipes and comments) are retained
         const { id } = req.params
         try {
             const item = await User.destroy({ where: { id: id } })

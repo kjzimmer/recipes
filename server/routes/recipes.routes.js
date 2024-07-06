@@ -4,12 +4,11 @@ import { recipeController } from "../controllers/recipes.controller.js";
 
 export const recipesRouter = Router()
 recipesRouter.route('/')
-    .get(authenticate, recipeController.get)
-    // .post(authenticate, recipeController.create)
     .post(authenticate, recipeController.create)
+    .get(authenticate, recipeController.get)
  
 recipesRouter.route('/:id')
     .get(authenticate, recipeController.get)
-    .delete(authenticate, recipeController.delete)
     .put(authenticate, recipeController.update)
+    .delete(authenticate, recipeController.delete)
 

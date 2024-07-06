@@ -7,6 +7,6 @@ ingredientsRouter.route('/')
     .post(authenticate, ingredientsController.create)
  
 ingredientsRouter.route('/:id')
-    .delete(authenticate, ingredientsController.delete)
     .put(authenticate, ingredientsController.update)
+    .delete(authenticate, ingredientsController.delete)
 

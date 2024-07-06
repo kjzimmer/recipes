@@ -26,5 +26,28 @@ export const ingredientsServices = {
             throw error
         }
     },
+
+    // Read
+    // all reads are done through the recipes service
+
+    // Update
+    update: async (ingredient) => {
+        try{
+            const res = await API_INSTANCE.put('/', ingredient)
+        } catch(error){ 
+            error.response.data?.msg ==='session expired' && (window.location = '/')
+            throw error
+        }
+    },
+
+    // Delete
+    delete: async (id) => {
+        try{
+            const res = await API_INSTANCE.delete(`/${id}`)
+        } catch(error){ 
+            error.response.data?.msg ==='session expired' && (window.location = '/')
+            throw error
+        }
+    }
 }
 
