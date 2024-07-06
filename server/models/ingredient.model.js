@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
 import { sequelize } from "../config/config.sequelize.js";
+import { DataTypes } from "sequelize";
 
 export const Ingredient = sequelize.define('ingredients',
     {
@@ -16,7 +16,7 @@ export const Ingredient = sequelize.define('ingredients',
 
 // the following sync should be removed from production to 
 // ensure the database is not accidentally modified by production
-// Ingredient.sync({alter:true, force:true})
+// Ingredient.sync({alter:true})
 //     .then()
 //     .catch(error => console.log('Ingredients table sync error'))
 

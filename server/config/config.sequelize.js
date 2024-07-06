@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
+// import { User } from '../models/user.model.js';
 
 dotenv.config();
 
@@ -27,3 +28,15 @@ export const dbConnect = () => {
     .then( console.log(`Connected to ${DB_NAME}`) )
     .catch( error => console.log(`Failed to connect to ${DB_NAME}`) )
 }
+
+sequelize.sync({alter:true})
+// .then(() => {
+//     User.create({
+//         firstName:'karl',
+//         lastName:'zimmer',
+//         email:'karl.zimmer@enterpriseedge.com',
+//         password:'1aA@5678'
+//     })
+//     .then(newUser => console.log('new user: ', newUser))
+//     .catch(error => confirm.log('create user error: ', error))
+// })

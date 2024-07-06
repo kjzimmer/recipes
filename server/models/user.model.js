@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
 import { sequelize } from "../config/config.sequelize.js";
+import { DataTypes } from "sequelize";
 import bcrypt from 'bcrypt'
 
 import { Recipe } from "./recipe.model.js";
@@ -49,23 +49,23 @@ export const User = sequelize.define('user',
     }
 )
 
-Recipe.belongsTo(User)
-User.hasMany(Recipe)
+Recipe.belongsTo(User, {foreignKey: 'userId'})
+User.hasMany(Recipe, {foreignKey: 'userId'})
 
-Rating.belongsTo(User)
-User.hasMany(Rating, { onDelete: 'SET NULL', onUpdate: 'CASCADE' })
+Rating.belongsTo(User, {foreignKey: 'userId'})
+User.hasMany(Rating, {foreignKey: 'userId'})
 
 // the following sync should be removed from production to 
 // ensure the database is not accidentally modified by production
-User.sync({ alter: true, force: true })
-    .then(() => {
-        Recipe.sync({ alter: true, force: true })
-            .then()
-            .catch(error => console.log('Recipes table sync error: ', error))
+// User.sync({ alter: true })
+//     .then(() => {
+//         Recipe.sync({ alter: true })
+//             .then()
+//             .catch(error => console.log('Recipes table sync error: ', error))
 
-        Rating.sync({ alter: true, force: true })
-            .then()
-            .catch(error => console.log('Ratings table sync error: ', error))
-    })
-    .catch(error => console.log('User table creation error: ', error))
+//         Rating.sync({ alter: true })
+//             .then()
+//             .catch(error => console.log('Ratings table sync error: ', error))
+//     })
+//     .catch(error => console.log('User table creation error: ', error))
 

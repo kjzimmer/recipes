@@ -1,3 +1,5 @@
+import { Ingredient } from "../models/ingredient.model.js";
+import { PrepStep } from "../models/prepStep.model.js";
 import { Recipe } from "../models/recipe.model.js";
 
 export const recipeController = {
@@ -19,7 +21,25 @@ export const recipeController = {
 
         if (id) {
             Recipe.findByPk(id)
-                .then(recipe => res.status(200).json(recipe))
+                .then(recipe => {
+                    console.log('recipe: ', recipe)
+
+                    Ingredient.findAll({where:{recipeId:id}})
+                    .then(ingredients => {
+                        // console.log('ingredients: ', ingredients[0])
+                        const temp = ingredients.map(ing => ing.dataValues)
+                        // console.log('ing: ', temp)
+                        recipe.dataValues.ingredients = temp
+
+                        PrepStep.findAll({where:{recipeId:id}})
+                        .then(steps => {
+                            const temp = steps.map(step => step.dataValues)
+                            // console.log('steps: ', steps)
+                            recipe.dataValues.prepSteps = temp
+                            res.status(200).json(recipe)
+                        })
+                    })
+                })
                 .catch(error => {
                     console.log(error)
                     res.status(400).json(error)
