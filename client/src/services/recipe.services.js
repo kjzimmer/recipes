@@ -27,6 +27,7 @@ export const recipeServices = {
         }
     },
 
+    // Read
     get: async (id) => {
         try{
             if(id){
@@ -36,6 +37,26 @@ export const recipeServices = {
                 const res = await API_INSTANCE.get(`/`)
                 return res.data
             }
+        } catch(error){ 
+            error.response.data?.msg ==='session expired' && (window.location = '/')
+            throw error
+        }
+    },
+
+    // Update
+    update: async (recipe) => {
+        try{
+            const res = await API_INSTANCE.put('/', recipe)
+        } catch(error){ 
+            error.response.data?.msg ==='session expired' && (window.location = '/')
+            throw error
+        }
+    },
+
+    // Delete
+    delete: async (id) => {
+        try{
+            const res = await API_INSTANCE.delete(`/${id}`)
         } catch(error){ 
             error.response.data?.msg ==='session expired' && (window.location = '/')
             throw error
