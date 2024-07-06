@@ -7,6 +7,8 @@ import { usersRouter  } from './routes/user.routes.js'
 import cookies from 'cookie-parser'
 import { routeRouter } from './routes/root.routes.js'
 import { recipesRouter } from './routes/recipes.routes.js'
+import { ingredientsRouter } from './routes/ingredients.routes.js'
+import { prepStepsRouter } from './routes/prepSteps.routes.js'
 
 const app = express()
 app.use(express.json(), cors(), cookies())
@@ -21,6 +23,8 @@ dbConnect()
 app.use('/api', routeRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/recipes', recipesRouter)
+app.use('/api/ingredients', ingredientsRouter)
+app.use('/api/prepSteps', prepStepsRouter)
 
 app.listen(PORT, () => {
     console.log(`${APP_NAME} server listening on port: ${PORT}`)
