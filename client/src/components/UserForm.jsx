@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import Col from 'react-bootstrap/esm/Col';
@@ -6,7 +7,6 @@ import Row from 'react-bootstrap/esm/Row';
 export function UserForm({user, updateInput}) {
     return(
         <>
-            <h1>Create an Account</h1>
             <Form>
                 <Row className='form'>
                     <Form.Group as={Col}>

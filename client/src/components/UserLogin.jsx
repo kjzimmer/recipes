@@ -33,12 +33,12 @@ export function UserLogin() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type='password' name='password' placeholder='Password' />
                 </Form.Group>
-                <p className='text-danger'>{errors}</p>
+                { errors && <p className='text-danger'>{errors}</p> }
                 <Button type='submit' className='form'>
                     Submit
                 </Button>
             </Form>
-            <Link to={'/register'}>Get an Account</Link>
+            <Link to={'/register'}>Create an Account</Link>
         </>
     )
 }

@@ -1,5 +1,6 @@
 import { UserForm } from "./UserForm"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 
 export function UserCreate() {
@@ -18,7 +19,9 @@ export function UserCreate() {
 
     return(
         <>
+            <h1>Create an Account</h1>
             <UserForm user={user} updateInput={updateInput} />
+            <Link to={'/'}>Back to Login</Link>
         </>
     )
 }
