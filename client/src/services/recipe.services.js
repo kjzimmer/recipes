@@ -16,49 +16,56 @@ API_INSTANCE.interceptors.request.use((config) => {
 
 export const recipeServices = {
 
+    upload: async (formData) => {
+        try {
+            console.log('received submit')
+            const res = await API_INSTANCE.post('/image', formData)
+        } catch (error) { throw error }
+    },
+
     //Create
     create: async (recipe) => {
         try {
             const res = await API_INSTANCE.post('/', recipe)
             return res
-        } catch(error){ 
-            error.response.data?.msg ==='session expired' && (window.location = '/')
+        } catch (error) {
+            error.response.data?.msg === 'session expired' && (window.location = '/')
             throw error
         }
     },
 
     // Read
     get: async (id) => {
-        try{
-            if(id){
+        try {
+            if (id) {
                 const res = await API_INSTANCE.get(`/${id}`)
                 return res.data
-            }else{
+            } else {
                 const res = await API_INSTANCE.get(`/`)
                 return res.data
             }
-        } catch(error){ 
-            error.response.data?.msg ==='session expired' && (window.location = '/')
+        } catch (error) {
+            error.response.data?.msg === 'session expired' && (window.location = '/')
             throw error
         }
     },
 
     // Update
     update: async (recipe) => {
-        try{
+        try {
             const res = await API_INSTANCE.put('/', recipe)
-        } catch(error){ 
-            error.response.data?.msg ==='session expired' && (window.location = '/')
+        } catch (error) {
+            error.response.data?.msg === 'session expired' && (window.location = '/')
             throw error
         }
     },
 
     // Delete
     delete: async (id) => {
-        try{
+        try {
             const res = await API_INSTANCE.delete(`/${id}`)
-        } catch(error){ 
-            error.response.data?.msg ==='session expired' && (window.location = '/')
+        } catch (error) {
+            error.response.data?.msg === 'session expired' && (window.location = '/')
             throw error
         }
     }

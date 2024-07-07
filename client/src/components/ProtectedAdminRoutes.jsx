@@ -9,7 +9,7 @@ import { Recipes } from "./Recipes"
 import { BlankAdminPage } from "./BlankAdminPage"
 
 const PrivateRoutes = () => {
-console.log('checking authorization: ', `we don't get here without authentication`)
+console.log('checking authorization: ', `we don't get here without authentication but user may not have authorization`)
     return (
         // TODO: need to add check if use has admin authorization
         true ? <Outlet/> : <Navigate to='/recipes'/>   // user has admin authorization

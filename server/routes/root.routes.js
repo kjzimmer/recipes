@@ -9,6 +9,3 @@ routeRouter.route('/login')
 routeRouter.route('/register')
     .post(userController.register)
 
-// add controller to download dynamic images
-// routeRouter.route('/images')
-//     .get(new controller function call here)
