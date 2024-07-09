@@ -1,13 +1,15 @@
 import { Routes, Route } from "react-router-dom"
 import { Navigate, Outlet } from 'react-router-dom'
 
-import { Header } from "./Header"
-import { ExampleRecipe } from "./ExampleRecipe"
-import { RecipeForm } from "./RecipeForm"
-import { AddRecipe } from "./AddRecipe"
-import { Recipes } from "./Recipes"
+import { Header } from "../componentsV2/Header"
+import { ExampleRecipe } from "../components/ExampleRecipe"
+import { RecipeForm } from "../components/RecipeForm"
+import { AddRecipe } from "../components/AddRecipe"
+import { Recipes } from "../views/Recipes"
 import { ProtectedAdminRoutes } from "./ProtectedAdminRoutes"
-
+import { RecipesCreate } from "../views/RecipesCreate"
+import { RecipeUpdate } from "../views/RecipeUpdate" 
+import { Recipe } from '../views/Recipe'
 const PrivateRoutes = () => {
     const token = localStorage.getItem('userToken')
 
@@ -23,7 +25,9 @@ export const ProtectedRoutes = () => {
         <Route element={<PrivateRoutes/>}>
             {/* these are routes that subscribers can use */}
             <Route path='/' element={<Recipes/>}/>
-            <Route path='/add' element={<AddRecipe/>}/>
+            <Route path='/create' element={<RecipesCreate/>}/>
+            <Route path='/update/:id' element={<RecipeUpdate/>}/>
+            <Route path='/:id' element={<Recipe />} />
 
             {/* need to add routes that only administrators can use */}
             <Route path='/admin/*' element={<ProtectedAdminRoutes/>}/>

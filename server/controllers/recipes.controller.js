@@ -57,9 +57,9 @@ export const recipeController = {
     // update
     update: async (req, res) => {
         // QUESTION: include the id in the req body then it's not needed in the address url
-        const { id } = req.params
+        // const { id } = req.params
 
-        Recipe.update(req.body, { where: { id: id } })
+        Recipe.update(req.body, { where: { id: req.body.id } })
             .then(recipe => res.status(200).json(recipe))
             .catch(error => {
                 console.log(error)

@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom"
 import { Navigate, Outlet } from 'react-router-dom'
 
-import { Header } from "./Header"
-import { ExampleRecipe } from "./ExampleRecipe"
-import { RecipeForm } from "./RecipeForm"
-import { AddRecipe } from "./AddRecipe"
-import { Recipes } from "./Recipes"
-import { BlankAdminPage } from "./BlankAdminPage"
+import { Header } from "../componentsV2/Header"
+import { ExampleRecipe } from "../components/ExampleRecipe"
+import { RecipeForm } from "../components/RecipeForm"
+import { AddRecipe } from "../components/AddRecipe"
+import { Recipes } from "../views/Recipes"
+import { BlankAdminPage } from "../components/BlankAdminPage"
 
 const PrivateRoutes = () => {
 console.log('checking authorization: ', `we don't get here without authentication but user may not have authorization`)

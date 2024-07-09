@@ -3,7 +3,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
-import { userServices } from '../../services/services';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -87,7 +86,6 @@ export function UserForm({ submitHandler }) {
 
     return (
         <>
-            <h2>Create an Account</h2>
             <Form onSubmit={handleSubmit}>
                 <Row className='form'>
                     <Form.Group as={Col}>
@@ -152,7 +150,6 @@ export function UserForm({ submitHandler }) {
                     Submit
                 </Button>
             </Form>
-            <Link to={'/'}>Login</Link>
         </>
     )
 }
