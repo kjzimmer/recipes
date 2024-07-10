@@ -41,6 +41,13 @@ export const Recipe = sequelize.define('recipe',
             validate: {
                 min: 0
             }
+        },
+        image:{
+            type: DataTypes.STRING,
+            allowNull: true,
+            validate: {
+                len: [2]
+            }
         }
     },
     {
