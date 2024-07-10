@@ -51,9 +51,9 @@ export const recipeServices = {
     },
 
     // Update
-    update: async (recipe) => {
+    update: async (recipe ) => {
         try {
-            const res = await API_INSTANCE.put('/', recipe)
+            const res = await API_INSTANCE.put(`/ `, recipe)
         } catch (error) {
             error.response.data?.msg === 'session expired' && (window.location = '/')
             throw error

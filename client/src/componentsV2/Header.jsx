@@ -10,12 +10,12 @@ export function Header() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="/">User Name Here</Navbar.Brand>
+        <Navbar.Brand href="/">Healthy Eating</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link href="/recipes/">Recipes</Nav.Link>
-            <Nav.Link href="/recipes/add/">Add Recipe</Nav.Link>
+            <Nav.Link href="/recipes/create/">Add Recipe</Nav.Link>
             <NavDropdown title="Profile" id="basic-nav-dropdown">
               <NavDropdown.Item href="/underConstruction">Contact</NavDropdown.Item>
               <NavDropdown.Item href="/underConstruction">Security</NavDropdown.Item>

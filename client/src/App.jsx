@@ -1,7 +1,7 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import { UnprotectedRoutes } from './components/UnprotectedRoutes'
-import { ProtectedRoutes } from './components/ProtectedRoutes'
+import { UnprotectedRoutes } from './routes/UnprotectedRoutes'
+import { ProtectedRoutes } from './routes/ProtectedRoutes'
 
 
 

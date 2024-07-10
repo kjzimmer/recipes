@@ -21,10 +21,10 @@ export const recipesRouter = Router()
 recipesRouter.route('/')
     .post(authenticate, recipeController.create)
     .get(authenticate, recipeController.get)
- 
-recipesRouter.route('/:id')
-    .get(authenticate, recipeController.get)
     .put(authenticate, recipeController.update)
+    
+    recipesRouter.route('/:id')
+    .get(authenticate, recipeController.get)
     .delete(authenticate, recipeController.delete)
 
 recipesRouter.route('/image')

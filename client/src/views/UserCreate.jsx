@@ -1,5 +1,7 @@
-import { UserForm } from "./UserForm"
+import { UserForm } from "../componentsV2/UserForm"
 import { useState } from "react"
+import { Link } from "react-router-dom"
+import { } from "../services/user.services"
 
 
 export function UserCreate() {
@@ -18,7 +20,9 @@ export function UserCreate() {
 
     return(
         <>
-            <UserForm user={user} updateInput={updateInput} />
+            <h1>Create an Account</h1>
+            <UserForm />
+            <Link to={'/'}>Back to Login</Link>
         </>
     )
 }
