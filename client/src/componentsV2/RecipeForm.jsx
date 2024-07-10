@@ -78,7 +78,10 @@ export function RecipeForm( {service} ) {
                     />
                 </Form.Group>
                 </Row>
-                    <Form.Group>
+                {
+                    id
+                    ? <div>
+                        <Form.Group>
                         <Form.Label>Servings</Form.Label>
                         <Form.Control
                             type='number'
@@ -111,18 +114,13 @@ export function RecipeForm( {service} ) {
                         />
                     </Form.Group>
                 </Row>
+                    
+                    </div> 
+                    : null
+                }
                 <Button variant='primary' type='submit' className='form'>
                     Submit
                 </Button>
-            </Form>
-            <Form>
-                <Form.Group>
-                    <Form.Label>Ingredient</Form.Label>
-                    <Form.Control 
-                        type='text'
-                        name='ingredient'
-                    />
-                </Form.Group>
             </Form>
         </>
     )

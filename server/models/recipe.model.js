@@ -23,21 +23,21 @@ export const Recipe = sequelize.define('recipe',
         },
         servings: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 min: 1
             }
         },
         prepTime: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 min: 1
             }
         },
         cookTime: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 min: 0
             }
