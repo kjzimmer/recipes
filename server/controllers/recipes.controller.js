@@ -30,7 +30,6 @@ export const recipeController = {
                 }]
             })
                 .then(recipe => {
-                    console.log('recipe: ', recipe)
                     res.status(200).json(recipe)
                 })
                 .catch(error => {
