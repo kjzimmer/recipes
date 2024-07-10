@@ -14,11 +14,11 @@ export function RecipeForm( {service} ) {
     const [ recipe, setRecipe ] = useState({
         name: '',
         description: '',
-        servings: '',
-        prepTime: '',
-        cookTime: '',
-        ingredients: [],
-        prepSteps: []
+        // servings: '',
+        // prepTime: '',
+        // cookTime: '',
+        // ingredients: [],
+        // prepSteps: []
     })
 
     const { id } = useParams()

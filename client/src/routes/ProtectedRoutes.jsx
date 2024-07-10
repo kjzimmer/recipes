@@ -23,6 +23,7 @@ export const ProtectedRoutes = () => {
             {/* these are routes that subscribers can use */}
             <Route path='/' element={<Recipes/>}/>
             <Route path='/create' element={<RecipesCreate/>}/>
+            <Route path='/create/:id' element={<RecipesCreate/>} />
             <Route path='/update/:id' element={<RecipeUpdate/>}/>
             <Route path='/:id' element={<Recipe />} />
 
