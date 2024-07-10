@@ -20,7 +20,7 @@ export const prepStepServices = {
     create: async (step) => {
         try {
             const res = await API_INSTANCE.post('/', step)
-            return res
+            return res.data
         } catch(error){ 
             error.response.data?.msg ==='session expired' && (window.location = '/')
             throw error
@@ -34,6 +34,7 @@ export const prepStepServices = {
     update: async (step) => {
         try{
             const res = await API_INSTANCE.put('/', step)
+            return res.data
         } catch(error){ 
             error.response.data?.msg ==='session expired' && (window.location = '/')
             throw error

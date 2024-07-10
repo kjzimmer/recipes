@@ -49,9 +49,6 @@ export const recipeController = {
 
     // update
     update: async (req, res) => {
-        // QUESTION: include the id in the req body then it's not needed in the address url
-        // const { id } = req.params
-
         Recipe.update(req.body, { where: { id: req.body.id } })
             .then(recipe => res.status(200).json(recipe))
             .catch(error => {
@@ -63,7 +60,7 @@ export const recipeController = {
     // delete
     delete: async (req, res) => {
         // TODO: arrange a means to deal with cases where the user is refferenced by othe tables
-        // need to either delete the refference or keep the usere but mark them in active
+        // need to either delete the refference or keep the user but mark them in active
         const { id } = req.params
 
         Recipe.destroy({ where: { id: id } })

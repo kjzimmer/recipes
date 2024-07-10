@@ -54,30 +54,27 @@ export const Recipe = sequelize.define('recipe',
     }
 )
 
-Ingredient.belongsTo(Recipe)
+Ingredient.belongsTo(Recipe, {
+    foreignKey: {
+        name: 'recipeId',
+        allowNull: false
+    }
+})
 Recipe.hasMany(Ingredient)
 
-PrepStep.belongsTo(Recipe)
+PrepStep.belongsTo(Recipe, {
+    foreignKey: {
+        name: 'recipeId',
+        allowNull: false
+    }
+})
 Recipe.hasMany(PrepStep)
 
-Rating.belongsTo(Recipe)
+Rating.belongsTo(Recipe, {
+    foreignKey: {
+        name: 'recipeId',
+        allowNull: false
+    }
+})
 Recipe.hasMany(Rating)
-
-// the following sync should be removed from production to 
-// ensure the database is not accidentally modified by production
-// Recipe.sync({ alter: true, force: true })
-//     .then(() => {
-//         Ingredient.sync({ alter: true })
-//             .then()
-//             .catch(error => console.log('Ingredients table sync error'))
-
-//         PrepStep.sync({ alter: true })
-//             .then()
-//             .catch(error => console.log('PrepSteps table sync error'))
-
-//         Rating.sync({ alter: true })
-//             .then()
-//             .catch(error => console.log('Rating table sync error'))
-//     })
-//     .catch(error => console.log('Recipes table sync error'))
 
