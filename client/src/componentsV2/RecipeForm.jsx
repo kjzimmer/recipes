@@ -14,17 +14,6 @@ export function RecipeForm( {service} ) {
     const [ recipe, setRecipe ] = useState({
         name: '',
         description: '',
-<<<<<<< HEAD
-        // servings: '',
-        // prepTime: '',
-        // cookTime: '',
-=======
-        // servings: 0,
-        // prepTime: 0,
-        // cookTime: 0,
->>>>>>> 5ecc690dd5afbc3a4eaa2ea8a662df66cfd951cf
-        // ingredients: [],
-        // prepSteps: []
     })
 
     const { id } = useParams()
