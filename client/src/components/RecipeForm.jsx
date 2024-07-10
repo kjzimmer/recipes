@@ -33,7 +33,6 @@ export function RecipeForm( {service} ) {
         e.preventDefault() 
         service(recipe)
         .then(res => {
-            console.log('updating recipe: ', res)
             navigate(`/recipes/${res.id}`)
         })
         .catch(error => {
@@ -46,7 +45,6 @@ export function RecipeForm( {service} ) {
         if( id ){
             recipeServices.get(id)
             .then(res => {
-                console.log('got recipe: ',res)
                 setRecipe(res)
             })
             .catch(error => {
