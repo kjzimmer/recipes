@@ -47,7 +47,7 @@ export const userController = {
             .cookie("userToken", userToken, SECRET_KEY, {
                 httpOnly: true
             })
-            .json({ msg: 'success', token: userToken });
+            .json({ msg: 'success', token: userToken, userId: user.id });
     },
 
     // logout

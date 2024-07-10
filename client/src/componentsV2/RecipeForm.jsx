@@ -14,6 +14,8 @@ export function RecipeForm( {service} ) {
     const [ recipe, setRecipe ] = useState({
         name: '',
         description: '',
+        ingredients: [],
+        prepSteps:[],
     })
 
     const { id } = useParams()
@@ -23,6 +25,8 @@ export function RecipeForm( {service} ) {
         const { name, value } = e.target 
         setRecipe(prev => ({...prev, [name]: value}))
     }
+
+
 
     const submitHandler = e => {
         e.preventDefault() 
@@ -56,10 +60,10 @@ export function RecipeForm( {service} ) {
             description: e.target.ingredient.value,
             recipeId: id
         }
-
         ingredientsServices.create(newIngredient)
         .then( res => {
-            setRecipe(prev =>({...prev, ingredients:[...prev.ingredients, res.data]}))
+            setRecipe(prev =>({...prev, ingredients:[...prev.ingredients, res]}))
+
         })
     }
 
@@ -73,13 +77,13 @@ export function RecipeForm( {service} ) {
 
         prepStepServices.create(newStep)
         .then( res => {
-            setRecipe(prev =>({...prev, prepSteps:[...prev.prepSteps, res.data]}))
+            setRecipe(prev =>({...prev, prepSteps:[...prev.prepSteps, res]}))
         })
     }
 
     return(
         <>
-            <Form onSubmit={submitHandler}>
+            <Form id='recipeForm_Id' onSubmit={submitHandler}>
                 <Row className='form'>
                     <Form.Group as={Col}>
                         <Form.Label>Name</Form.Label>
@@ -139,14 +143,59 @@ export function RecipeForm( {service} ) {
                         />
                     </Form.Group>
                 </Row>
-                    
                     </div> 
                     : null
                 }
-                <Button variant='primary' type='submit' className='form'>
-                    Submit
-                </Button>
             </Form>
+            {
+                id
+                ?   <div>
+                    <Form onSubmit={submitIngredient}>
+                        <Form.Group>
+                            <Form.Label>Ingredients</Form.Label>
+                            <Form.Control
+                                type='text'
+                                name='ingredient'
+                            />
+                        </Form.Group>
+                        <Button variant='primary' type='submit' className='form'>
+                            Add Ingredient
+                        </Button>
+                    </Form>
+                    {
+                        recipe.ingredients.map( (ingredient, index) => (
+                            <p key={index} > {index + 1}: {ingredient.description} </p>
+                        ) )
+                    }
+                </div>
+                : null
+            }
+            {
+                id
+                ?   <div>
+                    <Form onSubmit={submitPrepStep}>
+                        <Form.Group>
+                            <Form.Label>Steps</Form.Label>
+                            <Form.Control
+                                type='text'
+                                name='prepStep'
+                            />
+                        </Form.Group>
+                        <Button variant='primary' type='submit' className='form'>
+                            Add Step
+                        </Button>
+                    </Form>
+                    {
+                        recipe.prepSteps.map( (step, index) => (
+                            <p key={index} > {index + 1}: {step.description} </p>
+                        ) )
+                    }
+                </div>
+                : null
+            }
+            <Button variant='primary' form='recipeForm_Id'  type='submit' className='form'>
+                    Submit
+            </Button>
         </>
     )
 }

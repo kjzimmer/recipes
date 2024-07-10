@@ -32,6 +32,8 @@ export function Recipe() {
         <>
             <h1> {recipe.name} </h1>
             <p> {recipe.description} </p>
+            <p> Servings: { recipe.servings } </p>
+            
             <Link to={`/recipes/update/${id}`}>Update Recipe</Link>
             <button onClick={() => deleteRecipe(recipe.id)}> Delete this Recipe</button>
 

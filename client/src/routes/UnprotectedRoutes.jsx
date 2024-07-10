@@ -9,7 +9,7 @@ export const UnprotectedRoutes = () => {
     return (<>
         <Routes>
             <Route path='/login' element={<UserLogin/>}/>
-            <Route path='/register' element={<UserForm submitHandler={userServices.register}/>}/>
+            <Route path='/register' element={<UserCreate submitHandler={userServices.register}/>}/>
             <Route path='/*' element={<UserLogin />}/>
         </Routes>
     </>)
