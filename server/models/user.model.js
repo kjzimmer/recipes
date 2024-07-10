@@ -50,9 +50,19 @@ export const User = sequelize.define('user',
 )
 
 
-Recipe.belongsTo(User, {foreignKey: 'userId'})
-User.hasMany(Recipe, {foreignKey: 'userId'})
+Recipe.belongsTo(User, {
+    foreignKey: {
+        name: 'userId',
+        allowNull: false
+    }
+})
+User.hasMany(Recipe)
 
-Rating.belongsTo(User, {foreignKey: 'userId'})
-User.hasMany(Rating, {foreignKey: 'userId'})
+Rating.belongsTo(User, {
+    foreignKey: {
+        name: 'userId',
+        allowNull: false
+    }
+})
+User.hasMany(Rating)
 

@@ -18,10 +18,7 @@ export const ingredientsController = {
 
     // update
     update: async (req, res) => {
-        // QUESTION: include the id in the req body then it's not needed in the address url
-        const { id } = req.params
-
-        Ingredient.update(req.body, { where: { id: id } })
+        Ingredient.update(req.body, { where: { id: req.body.id } })
             .then(ingredient => res.status(200).json(ingredient))
             .catch(error => {
                 console.log(error)

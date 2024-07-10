@@ -18,10 +18,7 @@ export const prepStepsController = {
 
     // update
     update: async (req, res) => {
-        // QUESTION: include the id in the req body then it's not needed in the address url
-        const { id } = req.params
-
-        PrepStep.update(req.body, { where: { id: id } })
+        PrepStep.update(req.body, { where: { id: req.body.id } })
             .then(step => res.status(200).json(step))
             .catch(error => {
                 console.log(error)

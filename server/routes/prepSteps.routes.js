@@ -5,8 +5,8 @@ import { prepStepsController } from "../controllers/prepSteps.controller.js";
 export const prepStepsRouter = Router()
 prepStepsRouter.route('/')
     .post(authenticate, prepStepsController.create)
+    .put(authenticate, prepStepsController.update)
 
 prepStepsRouter.route('/:id')
-    .put(authenticate, prepStepsController.update)
     .delete(authenticate, prepStepsController.delete)
 
