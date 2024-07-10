@@ -59,7 +59,7 @@ export function RecipesCreate() {
                     Submit
                 </Button>
             </Form> */}
-            <RecipeForm service={recipeServices.update} />
+            <RecipeForm service={recipeServices.create} />
         </>
     )
 }
