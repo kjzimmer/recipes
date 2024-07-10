@@ -20,25 +20,18 @@ export const recipeController = {
         const { id } = req.params
 
         if (id) {
-            Recipe.findByPk(id)
+            Recipe.findByPk(id, {
+                include:[{
+                    model:Ingredient,
+                    as:'ingredients'
+                },{
+                    model: PrepStep,
+                    as: 'prepSteps'
+                }]
+            })
                 .then(recipe => {
                     console.log('recipe: ', recipe)
-
-                    Ingredient.findAll({where:{recipeId:id}})
-                    .then(ingredients => {
-                        // console.log('ingredients: ', ingredients[0])
-                        const temp = ingredients.map(ing => ing.dataValues)
-                        // console.log('ing: ', temp)
-                        recipe.dataValues.ingredients = temp
-
-                        PrepStep.findAll({where:{recipeId:id}})
-                        .then(steps => {
-                            const temp = steps.map(step => step.dataValues)
-                            // console.log('steps: ', steps)
-                            recipe.dataValues.prepSteps = temp
-                            res.status(200).json(recipe)
-                        })
-                    })
+                    res.status(200).json(recipe)
                 })
                 .catch(error => {
                     console.log(error)
