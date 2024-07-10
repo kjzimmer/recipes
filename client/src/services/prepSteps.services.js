@@ -14,7 +14,7 @@ API_INSTANCE.interceptors.request.use((config) => {
     return config;
 });
 
-export const ingredientsServices = {
+export const prepStepServices = {
 
     //Create
     create: async (step) => {
