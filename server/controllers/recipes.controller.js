@@ -58,6 +58,7 @@ export const recipeController = {
 
     // delete
     delete: async (req, res) => {
+        console.log('in delete controller')
         // TODO: arrange a means to deal with cases where the user is refferenced by othe tables
         // need to either delete the refference or keep the user but mark them in active
         const { id } = req.params

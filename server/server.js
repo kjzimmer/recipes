@@ -23,6 +23,7 @@ dbConnect()
 app.use('/api', routeRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/recipes', recipesRouter)
+// app.use('/api/recipes', ()=>console.log('$$$$$$$$$$$'))
 app.use('/api/ingredients', ingredientsRouter)
 app.use('/api/prepSteps', prepStepsRouter)
 

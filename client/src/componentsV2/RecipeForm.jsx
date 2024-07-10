@@ -14,9 +14,15 @@ export function RecipeForm( {service} ) {
     const [ recipe, setRecipe ] = useState({
         name: '',
         description: '',
+<<<<<<< HEAD
         // servings: '',
         // prepTime: '',
         // cookTime: '',
+=======
+        // servings: 0,
+        // prepTime: 0,
+        // cookTime: 0,
+>>>>>>> 5ecc690dd5afbc3a4eaa2ea8a662df66cfd951cf
         // ingredients: [],
         // prepSteps: []
     })
@@ -31,9 +37,10 @@ export function RecipeForm( {service} ) {
 
     const submitHandler = e => {
         e.preventDefault() 
+        console.log('in submit handler: ', recipe)
         service(recipe)
         .then(res => {
-            navigate(`/recipes/${res.id}`)
+            navigate(`/recipes/update/${res.id}`)
         })
         .catch(error => {
             setErrors(error)
