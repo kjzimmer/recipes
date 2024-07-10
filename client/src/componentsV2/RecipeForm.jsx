@@ -5,6 +5,8 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { recipeServices } from '../services/recipe.services';
+import { ingredientsServices} from '../services/ingredients.services'
+import { prepStepServices} from '../services/prepSteps.services'
 
 export function RecipeForm( {service} ) {
     const [errors, setErrors] = useState()
@@ -15,6 +17,8 @@ export function RecipeForm( {service} ) {
         servings: '',
         prepTime: '',
         cookTime: '',
+        ingredients: [],
+        prepSteps: []
     })
 
     const { id } = useParams()
@@ -29,7 +33,7 @@ export function RecipeForm( {service} ) {
         e.preventDefault() 
         service(recipe)
         .then(res => {
-            navigate(`/recipes/${res.data.id}`)
+            navigate(`/recipes/${res.id}`)
         })
         .catch(error => {
             setErrors(error)
@@ -41,7 +45,6 @@ export function RecipeForm( {service} ) {
         if( id ){
             recipeServices.get(id)
             .then(res => {
-                console.log(res)
                 setRecipe(res)
             })
             .catch(error => {
@@ -50,7 +53,33 @@ export function RecipeForm( {service} ) {
         }
     },[])
 
+    const submitIngredient = (e) => {
+        e.preventDefault()
 
+        const newIngredient = {
+            description: e.target.ingredient.value,
+            recipeId: id
+        }
+
+        ingredientsServices.create(newIngredient)
+        .then( res => {
+            setRecipe(prev =>({...prev, ingredients:[...prev.ingredients, res.data]}))
+        })
+    }
+
+    const submitPrepStep = (e) => {
+        e.preventDefault()
+
+        const newStep = {
+            description: e.target.prepStep.value,
+            recipeId: id
+        }
+
+        prepStepServices.create(newStep)
+        .then( res => {
+            setRecipe(prev =>({...prev, prepSteps:[...prev.prepSteps, res.data]}))
+        })
+    }
 
     return(
         <>
