@@ -14,13 +14,13 @@ API_INSTANCE.interceptors.request.use((config) => {
     return config;
 });
 
-export const ingredientsServices = {
+export const prepStepServices = {
 
     //Create
     create: async (step) => {
         try {
             const res = await API_INSTANCE.post('/', step)
-            return res
+            return res.data
         } catch(error){ 
             error.response.data?.msg ==='session expired' && (window.location = '/')
             throw error
@@ -34,6 +34,7 @@ export const ingredientsServices = {
     update: async (step) => {
         try{
             const res = await API_INSTANCE.put('/', step)
+            return res.data
         } catch(error){ 
             error.response.data?.msg ==='session expired' && (window.location = '/')
             throw error

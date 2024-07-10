@@ -20,7 +20,7 @@ export const ingredientsServices = {
     create: async (ingredient) => {
         try {
             const res = await API_INSTANCE.post('/', ingredient)
-            return res
+            return res.data
         } catch(error){ 
             error.response.data?.msg ==='session expired' && (window.location = '/')
             throw error
@@ -34,6 +34,7 @@ export const ingredientsServices = {
     update: async (ingredient) => {
         try{
             const res = await API_INSTANCE.put('/', ingredient)
+            return res.data
         } catch(error){ 
             error.response.data?.msg ==='session expired' && (window.location = '/')
             throw error

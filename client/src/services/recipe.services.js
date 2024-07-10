@@ -18,7 +18,6 @@ export const recipeServices = {
 
     upload: async (formData) => {
         try {
-            console.log('received submit')
             const res = await API_INSTANCE.post('/image', formData)
         } catch (error) { throw error }
     },
@@ -27,7 +26,7 @@ export const recipeServices = {
     create: async (recipe) => {
         try {
             const res = await API_INSTANCE.post('/', recipe)
-            return res
+            return res.data
         } catch (error) {
             error.response.data?.msg === 'session expired' && (window.location = '/')
             throw error
@@ -54,6 +53,7 @@ export const recipeServices = {
     update: async (recipe ) => {
         try {
             const res = await API_INSTANCE.put(`/ `, recipe)
+            return res.data
         } catch (error) {
             error.response.data?.msg === 'session expired' && (window.location = '/')
             throw error
