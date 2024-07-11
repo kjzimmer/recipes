@@ -244,7 +244,7 @@ export function RecipeForm({ service }) {
                         <Form onSubmit={submitIngredient}>
                             <Form.Group>
                                 <Form.Label>Ingredients </Form.Label>
-                                <Button variant='primary' type='submit' className='form'>Add</Button>
+                                <Button variant='primary' type='submit' className='form' title='Add Ingredient'>Add</Button>
                                 <Form.Control
                                     type='text'
                                     name='ingredient'
@@ -265,7 +265,7 @@ export function RecipeForm({ service }) {
                         <Form onSubmit={submitPrepStep}>
                             <Form.Group>
                                 <Form.Label>Steps </Form.Label>
-                                <Button variant='primary' type='submit' className='form'>Add</Button>
+                                <Button variant='primary' type='submit' className='form' title='Add Preparation Step'>Add</Button>
                                 <Form.Control
                                     type='text'
                                     name='prepStep'
