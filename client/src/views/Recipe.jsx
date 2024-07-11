@@ -47,11 +47,33 @@ export function Recipe() {
                 ? <p> Cook Time: { recipe.cookTime } </p>
                 : null
             }
-            
-
+            {
+                recipe.ingredients
+                ? <div>
+                    <p>Ingredients:</p>
+                    {
+                        recipe.ingredients.map((ingredient, index) => (
+                            <p key={index}> {index + 1}: {ingredient.description} </p>
+                        ))
+                    }
+                </div>
+                : null
+            }
+            {
+                recipe.prepSteps
+                ? <div>
+                    <p>Prep Steps:</p>
+                    {
+                        recipe.prepSteps.map((step, index) => (
+                            <p key={index}> {index + 1}: {step.description} </p>
+                        ))
+                    }
+                </div>
+                : null
+            }
             
             <Link to={`/recipes/update/${id}`}>Update Recipe</Link>
-            <button onClick={() => deleteRecipe(id)}> Delete this Recipe</button>
+            <button onClick={() => deleteRecipe(recipe.id)}> Delete this Recipe</button>
         </div>
     )
 }
