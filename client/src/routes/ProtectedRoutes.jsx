@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom"
 import { Navigate, Outlet } from 'react-router-dom'
-
-import { Header } from "../componentsV2/Header"
+import { Header } from "../components/Header"
 import { Recipes } from "../views/Recipes"
 import { ProtectedAdminRoutes } from "./ProtectedAdminRoutes"
 import { RecipesCreate } from "../views/RecipesCreate"
 import { RecipeUpdate } from "../views/RecipeUpdate" 
 import { Recipe } from '../views/Recipe'
+
 const PrivateRoutes = () => {
     const token = localStorage.getItem('userToken')
 

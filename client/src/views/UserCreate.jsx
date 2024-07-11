@@ -1,4 +1,4 @@
-import { UserForm } from "../componentsV2/UserForm"
+import { UserForm } from "../components/UserForm"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { userServices } from "../services/user.services"

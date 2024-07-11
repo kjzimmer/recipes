@@ -1,8 +1,5 @@
 import { recipeServices } from "../services/recipe.services"
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { useState } from "react";
-import { RecipeForm } from "../componentsV2/RecipeForm"
+import { RecipeForm } from "../components/RecipeForm"
 
 export function RecipesCreate() {
 

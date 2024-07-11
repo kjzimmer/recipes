@@ -1,9 +1,5 @@
 import { Routes, Route } from "react-router-dom"
 import { Navigate, Outlet } from 'react-router-dom'
-
-import { Header } from "../componentsV2/Header"
-import { ExampleRecipe } from "../components/ExampleRecipe"
-import { Recipes } from "../views/Recipes"
 import { BlankAdminPage } from "../components/BlankAdminPage"
 
 const PrivateRoutes = () => {

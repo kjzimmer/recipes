@@ -34,30 +34,30 @@ export function Recipe() {
         <div className="recipePage">
             <div className="recipeHeading">
                 <h1> {recipe.name} </h1>
-                <h2> {recipe.description} </h2>
+                <p> {recipe.description} </p>
             </div>
             <Row className="recipeTopRow">
                 {
                     recipe.servings
                     ? <Col><p> Servings: { recipe.servings } </p></Col>
-                    : null
+                    : <Col><p> Servings: Not provided </p></Col>
                 }
                 {
                     recipe.prepTime
                     ? <Col><p> Prep Time: { recipe.prepTime } minute(s) </p></Col>
-                    : null
+                    : <Col><p> Prep Time: Not provided </p></Col>
                 }
                 {
                     recipe.cookTime
                     ? <Col><p> Cook Time: { recipe.cookTime } minute(s) </p></Col>
-                    : null
+                    : <Col><p> Cook Time: Not provided </p></Col>
                 }
             </Row>
             <Row>
                 {
                     recipe.ingredients
-                    ? <Col>
-                        <p className="recipeHeading">Ingredients:</p>
+                    ? <Col className="recipeHeading">
+                        <p className="recipeI">Ingredients:</p>
                         {
                             recipe.ingredients.map((ingredient, index) => (
                                 <p key={index}> Item {index + 1}: {ingredient.description} </p>
@@ -68,8 +68,8 @@ export function Recipe() {
                 }
                 {
                     recipe.prepSteps
-                    ? <Col>
-                        <p className="recipeHeading">Prep Steps:</p>
+                    ? <Col  className="recipeHeading">
+                        <p className="recipeI">Prep Steps:</p>
                         {
                             recipe.prepSteps.map((step, index) => (
                                 <p key={index}> Step {index + 1}: {step.description} </p>
@@ -79,7 +79,7 @@ export function Recipe() {
                     : null
                 }
             </Row>
-            <button className="recipeButton"><Link to={`/recipes/update/${id}`}>Update Recipe</Link></button>
+            <button className="recipeButton"><Link className="recipeButton" to={`/recipes/update/${id}`}>Update Recipe</Link></button>
             <button className="recipeButton" onClick={() => deleteRecipe(recipe.id)}> Delete this Recipe</button>
         </div>
     )

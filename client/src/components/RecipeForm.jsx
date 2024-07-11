@@ -46,7 +46,7 @@ export function RecipeForm({ service, page }) {
             if (isNaN(value) || value < 1) { return 'Must be a number greater than 0' } else { return true }
         },
         cookTime: (value) => {
-            if (isNaN(value) || value < 1) { return 'Must be a number greater than 0' } else { return true }
+            if (isNaN(value) || value < 0) { return 'Must be a positive number' } else { return true }
         },
     }
 
@@ -233,8 +233,8 @@ export function RecipeForm({ service, page }) {
                     ? <div>
                         <Form onSubmit={submitIngredient}>
                             <Form.Group>
-                                <Form.Label>Ingredients </Form.Label>
-                                <Button variant='primary' type='submit' className='form' title='Add Ingredient'>Add</Button>
+                                <Form.Label>Ingredients</Form.Label>
+                                <Button variant='primary' type='submit' className='formButton' title='Add Ingredient'>Add</Button>
                                 <Form.Control
                                     type='text'
                                     name='ingredient'
@@ -255,7 +255,7 @@ export function RecipeForm({ service, page }) {
                         <Form onSubmit={submitPrepStep}>
                             <Form.Group>
                                 <Form.Label>Steps </Form.Label>
-                                <Button variant='primary' type='submit' className='form' title='Add Preparation Step'>Add</Button>
+                                <Button variant='primary' type='submit' className='formButton' title='Add Preparation Step'>Add</Button>
                                 <Form.Control
                                     type='text'
                                     name='prepStep'

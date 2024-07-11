@@ -1,7 +1,3 @@
-import Carousel from 'react-bootstrap/Carousel';
-import { ExampleRecipe } from '../components/ExampleRecipe';
-import Button from 'react-bootstrap/esm/Button';
-import {userServices} from '../services/services';
 import { recipeServices } from '../services/recipe.services';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';

@@ -61,15 +61,30 @@
 }
 
 .recipeHeading {
-  border-bottom: 1px solid gray;
+  padding: 1rem;
+  border: 1px solid gray;
 }
 
 .recipeTopRow {
   margin: 1rem;
-  border-bottom: 1px solid gray;
+  border: 1px solid gray;
+  padding: 1rem;
 }
 
 .recipeButton {
   margin-top: 1rem;
+  margin-left: 5px;
+  color: azure;
 }
+
+.formButton {
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+.recipeI {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid gray;
+}
+
 

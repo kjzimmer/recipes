@@ -1,4 +1,4 @@
-import { RecipeForm } from "../componentsV2/RecipeForm"
+import { RecipeForm } from "../components/RecipeForm"
 import {recipeServices } from '../services/recipe.services'
 
 export function RecipeUpdate() {

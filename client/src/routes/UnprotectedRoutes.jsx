@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import { UserLogin } from "../views/UserLogin"
 import { UserCreate } from "../views/UserCreate"
-import { UserForm } from "../componentsV2/UserForm"
 import { userServices } from "../services/services"
 
 
