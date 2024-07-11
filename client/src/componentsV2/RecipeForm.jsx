@@ -12,25 +12,43 @@ export function RecipeForm({ service }) {
     const [errors, setErrors] = useState({
         name: 'Must be at least 3 characters',
         description: 'Must be at least 3 characters',
-        servings: true,
-        prepTime: true,
-        cookTime: true,
+        // servings: true,
+        // prepTime: true,
+        // cookTime: true,
         form: false
     })
     const [displayErrors, setDisplayErrors] = useState(false)
 
     const [recipe, setRecipe] = useState({
         name: '',
-        description: '',
-        servings: undefined,
-        prepTime: undefined,
-        cookTime: undefined,
-        ingredients: [],
-        prepSteps: [],
+        description: ''
+        // , servings: undefined,
+        // prepTime: undefined,
+        // cookTime: undefined,
+        // ingredients: [],
+        // prepSteps: [],
     })
 
     const { id } = useParams()
     const navigate = useNavigate()
+
+    const validation = {
+        name: (value) => {
+            if (value.length < 3) { return 'Must be at least 3 characters' } else { return true }
+        },
+        description: (value) => {
+            if (value.length < 3) { return 'Must be at least 3 characters' } else { return true }
+        },
+        servings: (value) => {
+            if (isNaN(value) || value < 1) { return 'Must be a number greater than 0' } else { return true }
+        },
+        prepTime: (value) => {
+            if (isNaN(value) || value < 1) { return 'Must be a number greater than 0' } else { return true }
+        },
+        cookTime: (value) => {
+            if (isNaN(value) || value < 1) { return 'Must be a number greater than 0' } else { return true }
+        },
+    }
 
     const inputHandler = e => {
         const { name, value } = e.target
@@ -40,27 +58,8 @@ export function RecipeForm({ service }) {
 
             let errors = { ...prev }
 
-            const validation = {
-                name: () => {
-                    value.length < 3 ? errors.name = 'Must be at least 3 characters' : errors.name = true
-                },
-                description: () => {
-                    value.length < 3 ? errors.description = 'Must be at least 3 characters' : errors.description = true
-                },
-                servings: () => {
-                    isNaN(value) || value < 1 ? errors.servings = 'Must be a number greater than 0' : errors.servings = true
-                },
-                prepTime: () => {
-                    isNaN(value) || value < 1 ? errors.prepTime = 'Must be a number greater than 0' : errors.prepTime = true
-                },
-                cookTime: () => {
-                    isNaN(value) || value < 1 ? errors.cookTime = 'Must be a number greater than 0' : errors.cookTime = true
-                },
-            }
+            errors[name] = validation[name](value)
 
-            validation[name]()
-
-            console.log('errors: ', errors)
             errors.form = true
             for (let key in errors) {
                 if (errors[key] != true) {
@@ -72,17 +71,26 @@ export function RecipeForm({ service }) {
         })
     }
 
-
-
     const submitHandler = e => {
+
         e.preventDefault()
+
+        // let errors = {form:true}
+        // for( let key in recipe){
+        //     if(key in validation){
+        //         errors[key] = validation[key](recipe[key])
+        //         if(errors[key] != true) errors.form = false
+        //     }
+        // }
+
+        // setErrors(errors)
 
         setDisplayErrors(true)
 
-        console.log('in handler: ', errors.form)
         if (errors.form) {
             service(recipe)
                 .then(res => {
+                    0
                     navigate(`/recipes/update/${res.id}`)
                 })
                 .catch(error => {
@@ -96,6 +104,17 @@ export function RecipeForm({ service }) {
         if (id) {
             recipeServices.get(id)
                 .then(res => {
+                    let errors = { form: true }
+                    for (let key in res) {
+                        if (key in validation) {
+                            errors[key] = validation[key](res[key])
+                            if (errors[key] != true) errors.form = false
+                        }
+                    }
+
+                    setErrors(errors)
+                    // validate all fields here using a for in loop with local let errors
+                    // then setErrors
                     setRecipe(res)
                 })
                 .catch(error => {
@@ -224,18 +243,16 @@ export function RecipeForm({ service }) {
                     ? <div>
                         <Form onSubmit={submitIngredient}>
                             <Form.Group>
-                                <Form.Label>Ingredients</Form.Label>
+                                <Form.Label>Ingredients </Form.Label>
+                                <Button variant='primary' type='submit' className='form'>Add</Button>
                                 <Form.Control
                                     type='text'
                                     name='ingredient'
                                 />
                             </Form.Group>
-                            <Button variant='primary' type='submit' className='form'>
-                                Add Ingredient
-                            </Button>
                         </Form>
                         {
-                            recipe.ingredients.map((ingredient, index) => (
+                            recipe.ingredients?.map((ingredient, index) => (
                                 <p key={index} onClick={() => deleteIngredient(ingredient.id)}> {index + 1}: {ingredient.description} </p>
                             ))
                         }
@@ -247,18 +264,16 @@ export function RecipeForm({ service }) {
                     ? <div>
                         <Form onSubmit={submitPrepStep}>
                             <Form.Group>
-                                <Form.Label>Steps</Form.Label>
+                                <Form.Label>Steps </Form.Label>
+                                <Button variant='primary' type='submit' className='form'>Add</Button>
                                 <Form.Control
                                     type='text'
                                     name='prepStep'
                                 />
                             </Form.Group>
-                            <Button variant='primary' type='submit' className='form'>
-                                Add Step
-                            </Button>
                         </Form>
                         {
-                            recipe.prepSteps.map((step, index) => (
+                            recipe.prepSteps?.map((step, index) => (
                                 <p key={index} onClick={() => deletePrepStep(step.id)}> {index + 1}: {step.description} </p>
                             ))
                         }
