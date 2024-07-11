@@ -65,7 +65,8 @@ Ingredient.belongsTo(Recipe, {
     foreignKey: {
         name: 'recipeId',
         allowNull: false
-    }
+    },
+    onDelete: 'CASCADE'
 })
 Recipe.hasMany(Ingredient)
 
@@ -73,7 +74,8 @@ PrepStep.belongsTo(Recipe, {
     foreignKey: {
         name: 'recipeId',
         allowNull: false
-    }
+    },
+    onDelete: 'CASCADE'
 })
 Recipe.hasMany(PrepStep)
 
@@ -81,7 +83,8 @@ Rating.belongsTo(Recipe, {
     foreignKey: {
         name: 'recipeId',
         allowNull: false
-    }
+    },
+    onDelete: 'CASCADE'
 })
 Recipe.hasMany(Rating)
 
