@@ -7,7 +7,7 @@ export function RecipeUpdate() {
 
     return(
         <>
-            <h1>Update Recipe</h1>
+            <h1>Recipe</h1>
             <RecipeForm service={recipeServices.update} page={updatePage} />
         </>
     )
