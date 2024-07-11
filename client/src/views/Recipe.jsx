@@ -29,14 +29,29 @@ export function Recipe() {
     }
 
     return(
-        <>
+        <div className="recipePage">
             <h1> {recipe.name} </h1>
-            <p> {recipe.description} </p>
-            <p> Servings: { recipe.servings } </p>
+            <h2> {recipe.description} </h2>
+            {
+                recipe.servings
+                ? <p> Servings: { recipe.servings } </p>
+                : null
+            }
+            {
+                recipe.prepTime
+                ? <p> Prep Time: { recipe.prepTime } </p>
+                : null
+            }
+            {
+                recipe.cookTime
+                ? <p> Cook Time: { recipe.cookTime } </p>
+                : null
+            }
+            
+
             
             <Link to={`/recipes/update/${id}`}>Update Recipe</Link>
-            <button onClick={() => deleteRecipe(recipe.id)}> Delete this Recipe</button>
-
-        </>
+            <button onClick={() => deleteRecipe(id)}> Delete this Recipe</button>
+        </div>
     )
 }

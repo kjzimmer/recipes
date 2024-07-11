@@ -41,3 +41,21 @@
 .recipeCarousel p {
   color: white;
 }
+
+.recipeCard {
+  margin: 1rem;
+  padding: 2rem;
+  display: inline-block;
+}
+
+.recipeCard_Holder {
+  display: contents flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.recipePage {
+  border: 1px solid gray;
+  padding: 2rem;
+  margin: 1rem;
+}

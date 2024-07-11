@@ -5,29 +5,12 @@ import {userServices} from '../services/services';
 import { recipeServices } from '../services/recipe.services';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
 
 
 
 export function Recipes() {
     const [recipes, setRecipes] = useState([])
-
-    function getUsers(){
-        userServices.getAll()
-            .then(data => console.log('all users: ',data))
-    }
-
-    function createRecipe(){
-        const recipe = {
-            name:'test recipe',
-            description: 'just testing services',
-            servings:5,
-            prepTime: 32,
-            cookTime: 23
-        }
-
-        recipeServices.create(recipe)
-        .then(res => console.log(res))
-    }
 
     useEffect( () => {
         recipeServices.get()
@@ -43,38 +26,18 @@ export function Recipes() {
         <div>
             <h1>Recipes</h1>
             <h2>Find your next family recipe</h2>
-            {/* Carousel for recipes */}
-            {/* <Carousel className='recipeCarousel'>
-                <Carousel.Item interval={5000}>
-                    <ExampleRecipe />
-                    <Carousel.Caption>
-                        <h2>First slide label</h2>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item interval={5000}>
-                    <ExampleRecipe />
-                    <Carousel.Caption>
-                        <h2>Second slide label</h2>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item interval={5000}>
-                    <ExampleRecipe />
-                    <Carousel.Caption>
-                        <h2>Third slide label</h2>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-            </Carousel> */}
         </div>
+        <div className='recipeCard_Holder'>
             {
                 recipes.map( recipe => (
-                    <div key={recipe.id}>
-                        <p> {recipe.name} </p>
-                        <Link to={`/recipes/${recipe.id}`}> Go to Recipe </Link>
-                    </div>
+                    <Link to={`/recipes/${recipe.id}`}>
+                        <Card className='recipeCard' key={recipe.id}>
+                            <Card.Title> {recipe.name} </Card.Title>
+                            <Card.Text> {recipe.description} </Card.Text>
+                        </Card>
+                    </Link>
                 ) )
             }
+        </div>
     </>)
 }

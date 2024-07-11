@@ -30,7 +30,6 @@ export function RecipeForm( {service} ) {
 
     const submitHandler = e => {
         e.preventDefault() 
-        console.log('in submit handler: ', recipe)
         service(recipe)
         .then(res => {
             navigate(`/recipes/update/${res.id}`)
