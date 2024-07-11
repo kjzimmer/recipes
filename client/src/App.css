@@ -59,3 +59,17 @@
   padding: 2rem;
   margin: 1rem;
 }
+
+.recipeHeading {
+  border-bottom: 1px solid gray;
+}
+
+.recipeTopRow {
+  margin: 1rem;
+  border-bottom: 1px solid gray;
+}
+
+.recipeButton {
+  margin-top: 1rem;
+}
+

@@ -24,9 +24,7 @@ export const recipeServices = {
 
     //Create
     create: async (recipe) => {
-        console.log('********************')
         try {
-            console.log('in recipe create service: ', recipe)
             const res = await API_INSTANCE.post('/', recipe)
             return res.data
         } catch (error) {

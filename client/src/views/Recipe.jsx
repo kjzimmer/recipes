@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import { recipeServices } from "../services/recipe.services"
+import Col from "react-bootstrap/esm/Col"
+import Row from "react-bootstrap/esm/Row"
 
 
 export function Recipe() {
@@ -30,50 +32,55 @@ export function Recipe() {
 
     return(
         <div className="recipePage">
-            <h1> {recipe.name} </h1>
-            <h2> {recipe.description} </h2>
-            {
-                recipe.servings
-                ? <p> Servings: { recipe.servings } </p>
-                : null
-            }
-            {
-                recipe.prepTime
-                ? <p> Prep Time: { recipe.prepTime } </p>
-                : null
-            }
-            {
-                recipe.cookTime
-                ? <p> Cook Time: { recipe.cookTime } </p>
-                : null
-            }
-            {
-                recipe.ingredients
-                ? <div>
-                    <p>Ingredients:</p>
-                    {
-                        recipe.ingredients.map((ingredient, index) => (
-                            <p key={index}> {index + 1}: {ingredient.description} </p>
-                        ))
-                    }
-                </div>
-                : null
-            }
-            {
-                recipe.prepSteps
-                ? <div>
-                    <p>Prep Steps:</p>
-                    {
-                        recipe.prepSteps.map((step, index) => (
-                            <p key={index}> {index + 1}: {step.description} </p>
-                        ))
-                    }
-                </div>
-                : null
-            }
-            
-            <Link to={`/recipes/update/${id}`}>Update Recipe</Link>
-            <button onClick={() => deleteRecipe(recipe.id)}> Delete this Recipe</button>
+            <div className="recipeHeading">
+                <h1> {recipe.name} </h1>
+                <h2> {recipe.description} </h2>
+            </div>
+            <Row className="recipeTopRow">
+                {
+                    recipe.servings
+                    ? <Col><p> Servings: { recipe.servings } </p></Col>
+                    : null
+                }
+                {
+                    recipe.prepTime
+                    ? <Col><p> Prep Time: { recipe.prepTime } minute(s) </p></Col>
+                    : null
+                }
+                {
+                    recipe.cookTime
+                    ? <Col><p> Cook Time: { recipe.cookTime } minute(s) </p></Col>
+                    : null
+                }
+            </Row>
+            <Row>
+                {
+                    recipe.ingredients
+                    ? <Col>
+                        <p className="recipeHeading">Ingredients:</p>
+                        {
+                            recipe.ingredients.map((ingredient, index) => (
+                                <p key={index}> Item {index + 1}: {ingredient.description} </p>
+                            ))
+                        }
+                    </Col>
+                    : null
+                }
+                {
+                    recipe.prepSteps
+                    ? <Col>
+                        <p className="recipeHeading">Prep Steps:</p>
+                        {
+                            recipe.prepSteps.map((step, index) => (
+                                <p key={index}> Step {index + 1}: {step.description} </p>
+                            ))
+                        }
+                    </Col>
+                    : null
+                }
+            </Row>
+            <button className="recipeButton"><Link to={`/recipes/update/${id}`}>Update Recipe</Link></button>
+            <button className="recipeButton" onClick={() => deleteRecipe(recipe.id)}> Delete this Recipe</button>
         </div>
     )
 }

@@ -8,7 +8,7 @@ import { recipeServices } from '../services/recipe.services';
 import { ingredientsServices } from '../services/ingredients.services'
 import { prepStepServices } from '../services/prepSteps.services'
 
-export function RecipeForm({ service }) {
+export function RecipeForm({ service, page }) {
     const [errors, setErrors] = useState({
         name: true,
         description: true,
@@ -60,7 +60,6 @@ export function RecipeForm({ service }) {
 
             validation[name]()
 
-            console.log('errors: ', errors)
             errors.form = true
             for (let key in errors) {
                 if (errors[key] != true) {
@@ -76,18 +75,18 @@ export function RecipeForm({ service }) {
 
     const submitHandler = e => {
         e.preventDefault()
-
         setDisplayErrors(true)
-
-        console.log('in handler: ', errors.form)
         if (errors.form) {
             service(recipe)
                 .then(res => {
-                    navigate(`/recipes/update/${res.id}`)
+                    {
+                        page 
+                        ? navigate(`/recipes/update/${res.id}`)
+                        : navigate(`/recipes`)
+                    }
                 })
                 .catch(error => {
                     setErrors(error)
-                    console.log(error)
                 })
         }
     }
@@ -161,8 +160,8 @@ export function RecipeForm({ service }) {
                             value={recipe.name}
                             onInput={inputHandler}
                         />
-                        <p className='text-danger'>{displayErrors && errors.name}</p>
                     </Form.Group>
+                        <p className='text-danger'>{displayErrors && errors.name}</p>
 
                     <Form.Group className='form'>
                         <Form.Label>Description</Form.Label>
@@ -173,8 +172,8 @@ export function RecipeForm({ service }) {
                             value={recipe.description}
                             onInput={inputHandler}
                         />
-                        <p className='text-danger'>{displayErrors && errors.description}</p>
                     </Form.Group>
+                        <p className='text-danger'>{displayErrors && errors.description}</p>
                 </Row>
                 {
                     id
@@ -188,8 +187,8 @@ export function RecipeForm({ service }) {
                                     value={recipe.servings}
                                     onInput={inputHandler}
                                 />
-                                <p className='text-danger'>{displayErrors && errors.servings}</p>
                             </Form.Group>
+                                <p className='text-danger'>{displayErrors && errors.servings}</p>
                             <Row className='form'>
                                 <Form.Group as={Col}>
                                     <Form.Label>Prep Time</Form.Label>
@@ -259,7 +258,7 @@ export function RecipeForm({ service }) {
                         </Form>
                         {
                             recipe.prepSteps.map((step, index) => (
-                                <p key={index} onClick={() => deletePrepStep(step.id)}> {index + 1}: {step.description} </p>
+                                <p key={index} onClick={() => deletePrepStep(step.id)}> Step {index + 1}: {step.description} </p>
                             ))
                         }
                     </div>

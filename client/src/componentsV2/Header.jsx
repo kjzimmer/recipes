@@ -17,9 +17,9 @@ export function Header() {
             <Nav.Link href="/recipes/">Recipes</Nav.Link>
             <Nav.Link href="/recipes/create/">Add Recipe</Nav.Link>
             <NavDropdown title="Profile" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/underConstruction">Contact</NavDropdown.Item>
+              {/* <NavDropdown.Item href="/underConstruction">Contact</NavDropdown.Item>
               <NavDropdown.Item href="/underConstruction">Security</NavDropdown.Item>
-              <NavDropdown.Item href="/underConstruction">Other</NavDropdown.Item>
+              <NavDropdown.Item href="/underConstruction">Other</NavDropdown.Item> */}
               <NavDropdown.Divider />
               <NavDropdown.Item  onClick={userServices.logout}>Sign Out</NavDropdown.Item>
             </NavDropdown>
