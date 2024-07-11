@@ -8,7 +8,7 @@ import {userServices} from '../services/services';
 
 export function Header() {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-tertiary sticky-top">
       <Container>
         <Navbar.Brand href="/">Healthy Eating</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -48,8 +48,8 @@ export const recipeController = {
 
     // update
     update: async (req, res) => {
-        Recipe.update(req.body, { where: { id: req.body.id } })
-            .then(recipe => res.status(200).json(recipe))
+        Recipe.update(req.body, { plain: true,  where: { id: req.body.id } })
+            .then(recipe => res.status(200).json(req.body)) // could not get plain:true or returning:true to work.  to return the record saved just return the input to the update
             .catch(error => {
                 console.log(error)
                 res.status(400).json(error)
