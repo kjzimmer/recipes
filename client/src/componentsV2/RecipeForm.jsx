@@ -10,12 +10,12 @@ import { prepStepServices } from '../services/prepSteps.services'
 
 export function RecipeForm({ service }) {
     const [errors, setErrors] = useState({
-        name: true,
-        description: true,
+        name: 'Must be at least 3 characters',
+        description: 'Must be at least 3 characters',
         servings: true,
         prepTime: true,
         cookTime: true,
-        form: true
+        form: false
     })
     const [displayErrors, setDisplayErrors] = useState(false)
 
@@ -121,9 +121,9 @@ export function RecipeForm({ service }) {
 
     const deleteIngredient = (id) => {
         ingredientsServices.delete(id)
-        .then(res => {
-            setRecipe(prev => ({ ...prev, ingredients: prev.ingredients.filter(ingredient => ingredient.id != id) }))
-        })
+            .then(res => {
+                setRecipe(prev => ({ ...prev, ingredients: prev.ingredients.filter(ingredient => ingredient.id != id) }))
+            })
     }
 
     const submitPrepStep = (e) => {
@@ -143,9 +143,9 @@ export function RecipeForm({ service }) {
 
     const deletePrepStep = (id) => {
         prepStepServices.delete(id)
-        .then(res => {
-            setRecipe(prev => ({ ...prev, prepSteps: prev.prepSteps.filter(step => step.id != id) }))
-        })
+            .then(res => {
+                setRecipe(prev => ({ ...prev, prepSteps: prev.prepSteps.filter(step => step.id != id) }))
+            })
     }
 
     return (
@@ -228,7 +228,7 @@ export function RecipeForm({ service }) {
                                 <Form.Control
                                     type='text'
                                     name='ingredient'
-                                    />
+                                />
                             </Form.Group>
                             <Button variant='primary' type='submit' className='form'>
                                 Add Ingredient
