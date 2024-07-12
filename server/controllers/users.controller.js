@@ -11,7 +11,6 @@ const SECRET_KEY = process.env.SECRET_KEY
 export const userController = {
     // login
     login: async (req, res) => {
-        console.log('in login controller', req.body.email)
         const user = await User.findOne({
             raw: true,
             where: {
@@ -41,13 +40,8 @@ export const userController = {
             // expiresIn: '1d'
         }
         const userToken = jwt.sign(payload, SECRET_KEY, options)
-        console.log('token:', userToken)
-        // note that the response object allows chained calls to cookie and json
         res
-            .cookie("userToken", userToken, SECRET_KEY, {
-                httpOnly: true
-            })
-            .json({ msg: 'success', token: userToken, userId: user.id });
+            .json({ msg: 'success', token: userToken, userId: user.id, userName: `${user.firstName} ${user.lastName}` });
     },
 
     // logout

@@ -20,6 +20,8 @@ export const userServices = {
         try {
             const res = await API_INSTANCE.post('/login', credentials)
             localStorage.setItem('userToken', res.data.token)
+            localStorage.setItem('userId', res.data.userId)
+            localStorage.setItem('userName', res.data.userName)
             window.location = '/recipes'
         } catch (error) { throw error }
     },
@@ -27,7 +29,7 @@ export const userServices = {
     logout: async () => {
         try {
             const res = await API_INSTANCE.post('/users/logout')
-            localStorage.removeItem('userToken')
+            localStorage.clear()
             window.location = '/'
         } catch (error) { throw error }
     },
@@ -37,6 +39,8 @@ export const userServices = {
         try {
             const res = await API_INSTANCE.post('/register', user)
             localStorage.setItem('userToken', res.data.token)
+            localStorage.setItem('userId', res.data.userId)
+            localStorage.setItem('userName', res.data.userName)
             window.location = '/recipes'
         } catch (error) { throw error }
     },

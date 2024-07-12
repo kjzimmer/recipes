@@ -1,7 +1,7 @@
 import {Link, useNavigate} from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
-import {userServices} from '../services/services';
+import {userServices} from '../services/user.services';
 import { useState } from 'react';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
