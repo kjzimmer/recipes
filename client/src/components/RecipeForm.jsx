@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
+
+import {Button, Col, Form, Row, Image} from 'react-bootstrap';
+
 import { recipeServices } from '../services/recipe.services';
 import { ingredientsServices } from '../services/ingredients.services'
 import { prepStepServices } from '../services/prepSteps.services'
+
 
 export function RecipeForm({ service, page }) {
     const [errors, setErrors] = useState({
@@ -105,6 +105,7 @@ export function RecipeForm({ service, page }) {
                     setErrors(errors)
                     // validate all fields here using a for in loop with local let errors
                     // then setErrors
+                    console.log('img url: ',res.image)
                     setRecipe(res)
                 })
                 .catch(error => {
@@ -188,6 +189,8 @@ export function RecipeForm({ service, page }) {
                 {
                     id
                         ? <div>
+                            <Image src={`http://localhost:8000/api/recipes/image/${recipe.image}`} style={{width:300}} />
+
                             <Form.Group>
                                 <Form.Label>Servings</Form.Label>
                                 <Form.Control
