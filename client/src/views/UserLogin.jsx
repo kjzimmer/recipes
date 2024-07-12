@@ -13,7 +13,10 @@ export function UserLogin() {
     function handleSubmit(e){
         e.preventDefault()
 
+        console.log('in userLogin: ', localStorage.getItem('userToken'), localStorage.getItem('userId'))
+        alert('stop!')
         userServices.login({email:e.target.email.value, password:e.target.password.value})
+        .then()
         // NOTE: redirect after sucessful login is currently done in allServices.  should this be done here instead?
         // .then(data => {
         //     navigate('/recipes')

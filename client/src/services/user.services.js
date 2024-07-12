@@ -8,6 +8,7 @@ const API_INSTANCE = axios.create({
 API_INSTANCE.interceptors.request.use((config) => {
     const token = localStorage.getItem('userToken');
 
+    alert('in interceptor')
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
@@ -17,15 +18,21 @@ API_INSTANCE.interceptors.request.use((config) => {
 export const userServices = {
 
     login: async (credentials) => {
+        alert('in login service')
         try {
             const res = await API_INSTANCE.post('/login', credentials)
-            localStorage.setItem('userToken', res.data.token)
-            window.location = '/recipes'
+            localStorage.setItem('userId', '123')
+            // localStorage.setItem('userToken', res.data.token)
+            localStorage.setItem('userToken2', res.data.token)
+            console.log('in login:', res.data, localStorage.getItem('userId'))
+            alert('sdfgfdg')
+            // window.location = '/recipes'
         } catch (error) { throw error }
     },
 
     logout: async () => {
         try {
+            alert('in logout')
             const res = await API_INSTANCE.post('/users/logout')
             localStorage.removeItem('userToken')
             window.location = '/'
