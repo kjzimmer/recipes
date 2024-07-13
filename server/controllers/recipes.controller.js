@@ -56,6 +56,15 @@ export const recipeController = {
             })
     },
 
+    updateField: async (req, res) => {
+        Recipe.update({ [req.body.field]: req.body.value}, {where: { id: req.body.id } })
+            .then(recipe => res.status(200).json(req.body)) // could not get plain:true or returning:true to work.  to return the record saved just return the input to the update
+            .catch(error => {
+                console.log(error)
+                res.status(400).json(error)
+            })
+    },
+
     // delete
     delete: async (req, res) => {
         console.log('in delete controller')

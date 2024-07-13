@@ -105,7 +105,6 @@ export function RecipeForm({ service, page }) {
                     setErrors(errors)
                     // validate all fields here using a for in loop with local let errors
                     // then setErrors
-                    console.log('img url: ',res.image)
                     setRecipe(res)
                 })
                 .catch(error => {
@@ -158,6 +157,20 @@ export function RecipeForm({ service, page }) {
             })
     }
 
+    const inputOnFocus = (e) => {
+        e.target.startValue = e.target.value
+    }
+
+    const inputOnBlur = (e) => {
+        if(e.target.startValue != e.target.value){
+            recipeServices.updateField({
+                id:recipe.id,
+                field: e.target.name,
+                value: e.target.value
+            })
+        }
+    }
+
     return (
         <>
             <Form id='recipeForm_Id' onSubmit={submitHandler}>
@@ -170,6 +183,8 @@ export function RecipeForm({ service, page }) {
                             name='name'
                             value={recipe.name}
                             onInput={inputHandler}
+                            onBlur={inputOnBlur}
+                            onFocus={inputOnFocus}
                         />
                     </Form.Group>
                         <p className='text-danger'>{displayErrors && errors.name}</p>
@@ -182,6 +197,8 @@ export function RecipeForm({ service, page }) {
                             name='description'
                             value={recipe.description}
                             onInput={inputHandler}
+                            onBlur={inputOnBlur}
+                            onFocus={inputOnFocus}
                         />
                     </Form.Group>
                         <p className='text-danger'>{displayErrors && errors.description}</p>
@@ -199,7 +216,9 @@ export function RecipeForm({ service, page }) {
                                     name='servings'
                                     value={recipe.servings}
                                     onInput={inputHandler}
-                                />
+                                    onBlur={inputOnBlur}
+                                    onFocus={inputOnFocus}
+                                        />
                             </Form.Group>
                                 <p className='text-danger'>{displayErrors && errors.servings}</p>
                             <Row className='form'>
@@ -211,7 +230,9 @@ export function RecipeForm({ service, page }) {
                                         name='prepTime'
                                         value={recipe.prepTime}
                                         onInput={inputHandler}
-                                    />
+                                        onBlur={inputOnBlur}
+                                        onFocus={inputOnFocus}
+                                                />
                                     <p className='text-danger'>{displayErrors && errors.prepTime}</p>
                                 </Form.Group>
 
@@ -223,7 +244,9 @@ export function RecipeForm({ service, page }) {
                                         name='cookTime'
                                         value={recipe.cookTime}
                                         onInput={inputHandler}
-                                    />
+                                        onBlur={inputOnBlur}
+                                        onFocus={inputOnFocus}
+                                                />
                                     <p className='text-danger'>{displayErrors && errors.cookTime}</p>
                                 </Form.Group>
                             </Row>

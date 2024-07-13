@@ -60,6 +60,16 @@ export const recipeServices = {
         }
     },
 
+    updateField: async (recipe ) => {
+        try {
+            const res = await API_INSTANCE.put(`/field `, recipe)
+            return res.data
+        } catch (error) {
+            error.response.data?.msg === 'session expired' && (window.location = '/')
+            throw error
+        }
+    },
+
     // Delete
     delete: async (id) => {
         try {
