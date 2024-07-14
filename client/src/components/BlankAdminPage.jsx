@@ -25,6 +25,8 @@ export const BlankAdminPage = () => {
 
         const formData = new FormData()
         formData.append('img', file)
+        formData.append('recipeId', 123)
+        formData.append('fileName', file.name)
 
         recipeServices.upload(formData)
             .then(res => img1.src = 'http://localhost:8000/api/recipes/image/' + file.name)   // for recipes, save the file name in the recipe DB

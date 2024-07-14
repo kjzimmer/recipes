@@ -5,7 +5,7 @@ import { Col, Row, Image } from "react-bootstrap/esm"
 
 
 export function Recipe() {
-    const [recipe, setRecipe] = useState({})
+    const [recipe, setRecipe] = useState({image:'blank.jpg'})   // initalizing image to a real file eliminates server api error, calling for undefined image
     const { id } = useParams()
     const navigate = useNavigate()
 
