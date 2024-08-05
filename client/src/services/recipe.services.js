@@ -39,6 +39,7 @@ export const recipeServices = {
     //Create
     create: async (recipe) => {
         try {
+            console.log('creating: ', recipe)
             const res = await API_INSTANCE.post('/', recipe)
             return res.data
         } catch (error) {

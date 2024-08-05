@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
 
 import { Button, Col, Form, Row, Image } from 'react-bootstrap';
@@ -22,9 +22,10 @@ export function RecipeForm({ service, page }) {
     const [recipe, setRecipe] = useState({
         name: '',
         description: ''
-        // , servings: undefined,
-        // prepTime: undefined,
-        // cookTime: undefined,
+        // ,servings: '',
+        // prepTime: '',
+        // cookTime: '',
+        , image: 'blank.jpg',
         // ingredients: [],
         // prepSteps: [],
     })
@@ -53,7 +54,8 @@ export function RecipeForm({ service, page }) {
     const inputHandler = e => {
         const { name, value } = e.target
         setRecipe(prev => ({ ...prev, [name]: value }))
-
+console.log('recipe: ', recipe)
+console.log('errors: ', errors)
         setErrors(prev => {
 
             let errors = { ...prev }
@@ -76,6 +78,7 @@ export function RecipeForm({ service, page }) {
         e.preventDefault()
         setDisplayErrors(true)
         if (errors.form) {
+            console.log('submit recipe: ', recipe)
             service(recipe)
                 .then(res => {
                     {
@@ -90,8 +93,9 @@ export function RecipeForm({ service, page }) {
         }
     }
 
-    useEffect(() => {
-        if (id) {
+    // useEffect(() => {
+    useLayoutEffect(() => {
+            if (id) {
             recipeServices.get(id)
                 .then(res => {
                     let errors = { form: true }
@@ -162,7 +166,7 @@ export function RecipeForm({ service, page }) {
     }
 
     const inputOnBlur = (e) => {
-        if (e.target.startValue != e.target.value) {
+        if (recipe.id && e.target.startValue != e.target.value) {
             recipeServices.updateField({
                 id: recipe.id,
                 field: e.target.name,
@@ -227,14 +231,13 @@ export function RecipeForm({ service, page }) {
                     <p className='text-danger'>{displayErrors && errors.description}</p>
                 </Row>
                 {
-                    id
-                        ? <div>
+                    id ?
+                         <div>
                             <Image src={`http://localhost:8000/api/recipes/image/${recipe.image}`} style={{ width: 300 }} id='img1' />
                             <Form.Control
                                 type='file'
                                 placeholder='file'
                                 name='img'
-                                // value={user.lastName}
                                 onChange={onFileSelected}
                             />
                             <Form.Group>
@@ -301,12 +304,6 @@ export function RecipeForm({ service, page }) {
                                 <p key={index} onClick={() => deleteIngredient(ingredient.id)}> {index + 1}: {ingredient.description} </p>
                             ))
                         }
-                    </div>
-                    : null
-            }
-            {
-                id
-                    ? <div>
                         <Form onSubmit={submitPrepStep}>
                             <Form.Group>
                                 <Form.Label>Steps </Form.Label>
@@ -323,11 +320,12 @@ export function RecipeForm({ service, page }) {
                             ))
                         }
                     </div>
-                    : null
+                    : 
+                    <Button variant='primary' form='recipeForm_Id' type='submit' className='form'>
+                    Submit
+                </Button>
+    
             }
-            {/* <Button variant='primary' form='recipeForm_Id' type='submit' className='form'>
-                Submit
-            </Button> */}
         </>
     )
 }
