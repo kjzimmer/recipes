@@ -233,7 +233,7 @@ console.log('errors: ', errors)
                 {
                     id ?
                          <div>
-                            <Image src={`http://localhost:8000/api/recipes/image/${recipe.image}`} style={{ width: 300 }} id='img1' />
+                            <Image src={`http://${window.location.hostname}:8000/api/recipes/image/${recipe.image}`} style={{ width: 300 }} id='img1' />
                             <Form.Control
                                 type='file'
                                 placeholder='file'
