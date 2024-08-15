@@ -34,7 +34,7 @@ export function Recipe() {
             <div className="recipeHeading">
                 <h1> {recipe.name} </h1>
                 <p> {recipe.description} </p>
-                <Image src={`http://localhost:8000/api/recipes/image/${recipe.image}`} style={{width:300}} />
+                <Image src={`http://${window.location.hostname}:8000/api/recipes/image/${recipe.image}`} style={{width:300}} />
             </div>
             <Row className="recipeTopRow">
                 {

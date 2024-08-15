@@ -194,7 +194,7 @@ console.log('errors: ', errors)
         formData.append('fileName', file.name)
 
         recipeServices.upload(formData)
-            .then(res => img1.src = 'http://localhost:8000/api/recipes/image/' + file.name)   // for recipes, save the file name in the recipe DB
+            .then(res => img1.src = `http://${window.location.hostname}:8000/api/recipes/image/` + file.name)   // for recipes, save the file name in the recipe DB
             .catch(error => console.log(error))
     }
 
