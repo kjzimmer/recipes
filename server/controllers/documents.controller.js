@@ -3,6 +3,7 @@ export const documentsController = {
     // create
     // upload doc
     upload: async (req, res) => {
+        console.log('got img: ', req.body)
         res.status(200).json({ status: 'files received' })
     },
 

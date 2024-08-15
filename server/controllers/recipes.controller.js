@@ -56,6 +56,28 @@ export const recipeController = {
             })
     },
 
+    updateField: async (req, res) => {
+        Recipe.update({ [req.body.field]: req.body.value}, {where: { id: req.body.id } })
+            .then(recipe => res.status(200).json(req.body)) // could not get plain:true or returning:true to work.  to return the record saved just return the input to the update
+            .catch(error => {
+                console.log(error)
+                res.status(400).json(error)
+            })
+    },
+
+    upload: async (req, res) => {
+        Recipe.update({ image: req.body.fileName}, {where: { id: req.body.recipeId } })
+            .then(recipe => res.status(200).json({message:'file uploaded'})) // could not get plain:true or returning:true to work.  to return the record saved just return the input to the update
+            .catch(error => {
+                console.log(error)
+                res.status(400).json(error)
+            })
+
+        // console.log('got img: ', req.body)  // add code to update DB here
+        // res.status(200).json({ status: 'files received' })
+    },
+
+
     // delete
     delete: async (req, res) => {
         console.log('in delete controller')

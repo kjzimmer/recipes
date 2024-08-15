@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import { recipeServices } from "../services/recipe.services"
-import Col from "react-bootstrap/esm/Col"
-import Row from "react-bootstrap/esm/Row"
+import { Col, Row, Image } from "react-bootstrap/esm"
 
 
 export function Recipe() {
-    const [recipe, setRecipe] = useState({})
+    const [recipe, setRecipe] = useState({image:'blank.jpg'})   // initalizing image to a real file eliminates server api error, calling for undefined image
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -35,6 +34,7 @@ export function Recipe() {
             <div className="recipeHeading">
                 <h1> {recipe.name} </h1>
                 <p> {recipe.description} </p>
+                <Image src={`http://localhost:8000/api/recipes/image/${recipe.image}`} style={{width:300}} />
             </div>
             <Row className="recipeTopRow">
                 {

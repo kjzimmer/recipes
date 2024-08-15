@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
+
+import { Button, Col, Form, Row, Image } from 'react-bootstrap';
+
 import { recipeServices } from '../services/recipe.services';
 import { ingredientsServices } from '../services/ingredients.services'
 import { prepStepServices } from '../services/prepSteps.services'
+
 
 export function RecipeForm({ service, page }) {
     const [errors, setErrors] = useState({
@@ -22,9 +22,10 @@ export function RecipeForm({ service, page }) {
     const [recipe, setRecipe] = useState({
         name: '',
         description: ''
-        // , servings: undefined,
-        // prepTime: undefined,
-        // cookTime: undefined,
+        // ,servings: '',
+        // prepTime: '',
+        // cookTime: '',
+        , image: 'blank.jpg',
         // ingredients: [],
         // prepSteps: [],
     })
@@ -53,7 +54,8 @@ export function RecipeForm({ service, page }) {
     const inputHandler = e => {
         const { name, value } = e.target
         setRecipe(prev => ({ ...prev, [name]: value }))
-
+console.log('recipe: ', recipe)
+console.log('errors: ', errors)
         setErrors(prev => {
 
             let errors = { ...prev }
@@ -76,12 +78,13 @@ export function RecipeForm({ service, page }) {
         e.preventDefault()
         setDisplayErrors(true)
         if (errors.form) {
+            console.log('submit recipe: ', recipe)
             service(recipe)
                 .then(res => {
                     {
-                        page 
-                        ? navigate(`/recipes/update/${res.id}`)
-                        : navigate(`/recipes`)
+                        page
+                            ? navigate(`/recipes/update/${res.id}`)
+                            : navigate(`/recipes`)
                     }
                 })
                 .catch(error => {
@@ -90,8 +93,9 @@ export function RecipeForm({ service, page }) {
         }
     }
 
-    useEffect(() => {
-        if (id) {
+    // useEffect(() => {
+    useLayoutEffect(() => {
+            if (id) {
             recipeServices.get(id)
                 .then(res => {
                     let errors = { form: true }
@@ -157,6 +161,43 @@ export function RecipeForm({ service, page }) {
             })
     }
 
+    const inputOnFocus = (e) => {
+        e.target.startValue = e.target.value
+    }
+
+    const inputOnBlur = (e) => {
+        if (recipe.id && e.target.startValue != e.target.value) {
+            recipeServices.updateField({
+                id: recipe.id,
+                field: e.target.name,
+                value: e.target.value
+            })
+        }
+    }
+
+    function onFileSelected(e) {
+        var file = e.target.files[0];
+
+        // var reader = new FileReader();
+
+        
+        // reader.onload = function (e) {
+        //     img1.src = e.target.result;
+        //     img1.title = selectedFile.name;
+        // };
+
+        // reader.readAsDataURL(selectedFile);
+
+        const formData = new FormData()
+        formData.append('img', file)
+        formData.append('recipeId', recipe.id)
+        formData.append('fileName', file.name)
+
+        recipeServices.upload(formData)
+            .then(res => img1.src = 'http://localhost:8000/api/recipes/image/' + file.name)   // for recipes, save the file name in the recipe DB
+            .catch(error => console.log(error))
+    }
+
     return (
         <>
             <Form id='recipeForm_Id' onSubmit={submitHandler}>
@@ -169,9 +210,11 @@ export function RecipeForm({ service, page }) {
                             name='name'
                             value={recipe.name}
                             onInput={inputHandler}
+                            onBlur={inputOnBlur}
+                            onFocus={inputOnFocus}
                         />
                     </Form.Group>
-                        <p className='text-danger'>{displayErrors && errors.name}</p>
+                    <p className='text-danger'>{displayErrors && errors.name}</p>
 
                     <Form.Group className='form'>
                         <Form.Label>Description</Form.Label>
@@ -181,13 +224,22 @@ export function RecipeForm({ service, page }) {
                             name='description'
                             value={recipe.description}
                             onInput={inputHandler}
+                            onBlur={inputOnBlur}
+                            onFocus={inputOnFocus}
                         />
                     </Form.Group>
-                        <p className='text-danger'>{displayErrors && errors.description}</p>
+                    <p className='text-danger'>{displayErrors && errors.description}</p>
                 </Row>
                 {
-                    id
-                        ? <div>
+                    id ?
+                         <div>
+                            <Image src={`http://localhost:8000/api/recipes/image/${recipe.image}`} style={{ width: 300 }} id='img1' />
+                            <Form.Control
+                                type='file'
+                                placeholder='file'
+                                name='img'
+                                onChange={onFileSelected}
+                            />
                             <Form.Group>
                                 <Form.Label>Servings</Form.Label>
                                 <Form.Control
@@ -196,9 +248,11 @@ export function RecipeForm({ service, page }) {
                                     name='servings'
                                     value={recipe.servings}
                                     onInput={inputHandler}
+                                    onBlur={inputOnBlur}
+                                    onFocus={inputOnFocus}
                                 />
                             </Form.Group>
-                                <p className='text-danger'>{displayErrors && errors.servings}</p>
+                            <p className='text-danger'>{displayErrors && errors.servings}</p>
                             <Row className='form'>
                                 <Form.Group as={Col}>
                                     <Form.Label>Prep Time</Form.Label>
@@ -208,6 +262,8 @@ export function RecipeForm({ service, page }) {
                                         name='prepTime'
                                         value={recipe.prepTime}
                                         onInput={inputHandler}
+                                        onBlur={inputOnBlur}
+                                        onFocus={inputOnFocus}
                                     />
                                     <p className='text-danger'>{displayErrors && errors.prepTime}</p>
                                 </Form.Group>
@@ -220,6 +276,8 @@ export function RecipeForm({ service, page }) {
                                         name='cookTime'
                                         value={recipe.cookTime}
                                         onInput={inputHandler}
+                                        onBlur={inputOnBlur}
+                                        onFocus={inputOnFocus}
                                     />
                                     <p className='text-danger'>{displayErrors && errors.cookTime}</p>
                                 </Form.Group>
@@ -246,12 +304,6 @@ export function RecipeForm({ service, page }) {
                                 <p key={index} onClick={() => deleteIngredient(ingredient.id)}> {index + 1}: {ingredient.description} </p>
                             ))
                         }
-                    </div>
-                    : null
-            }
-            {
-                id
-                    ? <div>
                         <Form onSubmit={submitPrepStep}>
                             <Form.Group>
                                 <Form.Label>Steps </Form.Label>
@@ -268,11 +320,12 @@ export function RecipeForm({ service, page }) {
                             ))
                         }
                     </div>
-                    : null
+                    : 
+                    <Button variant='primary' form='recipeForm_Id' type='submit' className='form'>
+                    Submit
+                </Button>
+    
             }
-            <Button variant='primary' form='recipeForm_Id' type='submit' className='form'>
-                Submit
-            </Button>
         </>
     )
 }

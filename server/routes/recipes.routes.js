@@ -20,16 +20,18 @@ const uploads = multer({ storage: storage })
 export const recipesRouter = Router()
 recipesRouter.route('/')
     .post(authenticate, recipeController.create)
-    // .post(recipeController.create)
     .get(authenticate, recipeController.get)
     .put(authenticate, recipeController.update)
     
-    recipesRouter.route('/:id')
+recipesRouter.route('/field')
+    .put(authenticate, recipeController.updateField)
+
+recipesRouter.route('/:id')
     .get(authenticate, recipeController.get)
     .delete(authenticate, recipeController.delete)
 
 recipesRouter.route('/image')
-    .post(authenticate, uploads.single('img'), documentsController.upload)
+    .post(authenticate, uploads.single('img'), recipeController.upload)
 
 recipesRouter.route('/image/:fileName')
     .get(/*authenticate, */documentsController.download)    // TODO: figure out how to include authentication so only authenticated users can get pics
