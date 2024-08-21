@@ -194,7 +194,7 @@ console.log('errors: ', errors)
         formData.append('fileName', file.name)
 
         recipeServices.upload(formData)
-            .then(res => img1.src = `http://${window.location.hostname}:8000/api/recipes/image/` + file.name)   // for recipes, save the file name in the recipe DB
+            .then(res => img1.src = `http://${window.location.hostname}:8010/api/recipes/image/` + file.name)   // for recipes, save the file name in the recipe DB
             .catch(error => console.log(error))
     }
 
@@ -233,7 +233,7 @@ console.log('errors: ', errors)
                 {
                     id ?
                          <div>
-                            <Image src={`http://${window.location.hostname}:8000/api/recipes/image/${recipe.image}`} style={{ width: 300 }} id='img1' />
+                            <Image src={`http://${window.location.hostname}:8010/api/recipes/image/${recipe.image}`} style={{ width: 300 }} id='img1' />
                             <Form.Control
                                 type='file'
                                 placeholder='file'
