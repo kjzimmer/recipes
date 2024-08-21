@@ -4,17 +4,10 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// const DB_NAME = process.env.DB_NAME
-// const DB_USER_NAME = process.env.DB_USER_NAME
-// const DB_PASSWORD = process.env.DB_PASSWORD
-// const DB_HOST = process.env.DB_HOST
-// const DB_PORT = process.env.DB_PORT
-
-
 const DB_NAME = process.env.DB_NAME
 const DB_USER_NAME = process.env.DB_USER_NAME
 const DB_PASSWORD = process.env.DB_PASSWORD
-const DB_HOST = 'devmysql1.cpnjiuyyhode.us-west-2.rds.amazonaws.com'
+const DB_HOST = process.env.DB_HOST
 const DB_PORT = process.env.DB_PORT
 
 export const sequelize = new Sequelize(
