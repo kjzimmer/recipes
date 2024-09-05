@@ -8,6 +8,8 @@ import Card from 'react-bootstrap/Card';
 export function Recipes() {
     const [recipes, setRecipes] = useState([])
 
+    console.log('url: ', window.location.href)
+
     useEffect( () => {
         recipeServices.get()
         .then(res => {
@@ -26,7 +28,7 @@ export function Recipes() {
         <div className='recipeCard_Holder'>
             {
                 recipes.map( recipe => (
-                    <Link key={recipe.id} to={`/recipes/${recipe.id}`}>
+                    <Link key={recipe.id} to={`${window.location.href}/${recipe.id}`}>
                         <Card className='recipeCard' key={recipe.id}>
                             <Card.Title> {recipe.name} </Card.Title>
                             <Card.Text> {recipe.description} </Card.Text>

@@ -1,7 +1,11 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
-import { UnprotectedRoutes } from './routes/UnprotectedRoutes'
-import { ProtectedRoutes } from './routes/ProtectedRoutes'
+
+import { ClientRoutes } from './routes/ClientRoutes'
+import { ProviderRoutes } from './routes/ProviderRoutes'
+import { UserLogin } from './views/UserLogin'
+import { UserCreate } from './views/UserCreate'
+import { userServices } from './services/user.services'
 
 
 
@@ -10,8 +14,10 @@ function App() {
     <>
     <h1> Healthy Eating </h1>
     <Routes>
-      <Route path='/*' element={<UnprotectedRoutes/>}/>
-      <Route path='/recipes/*' element={<ProtectedRoutes/>}/>
+      <Route path='/login' element={<UserLogin/>}/>
+      <Route path='/register' element={<UserCreate submitHandler={userServices.register}/>}/>
+      <Route path='/provider/*' element={<ProviderRoutes/>}/>
+      <Route path='/*' element={<ClientRoutes/>}/>
     </Routes>
     </>
   )

@@ -6,7 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import {userServices} from '../services/user.services';
 
 
-export function Header() {
+export function ProviderHeader() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary sticky-top">
       <Container>
@@ -14,8 +14,9 @@ export function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="/recipes/">Recipes</Nav.Link>
-            <Nav.Link href="/recipes/create/">Add Recipe</Nav.Link>
+            <Nav.Link href="/provider/recipes">Recipes</Nav.Link>
+            <Nav.Link href="/provider/clients">Clients</Nav.Link>
+            <Nav.Link href="/provider/recipes/create/">Add Recipe</Nav.Link>
             <NavDropdown title={localStorage.getItem('userName')} id="basic-nav-dropdown">
               <NavDropdown.Item href="/underConstruction">Contact</NavDropdown.Item>
               <NavDropdown.Item href="/underConstruction">Security</NavDropdown.Item>
